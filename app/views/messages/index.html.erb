@@ -1,0 +1,10 @@
+<ul>
+
+<% @messages.each do |message| %> 
+  <li>
+  	<p><%= @our_names[ message["user_id"]] %></p>
+  	<p> <%= message["msg"] %> </p>
+  	<p> <%= message["created_at"] %> </p>
+  </li>
+<% end %>
+</ul>
