@@ -1,6 +1,16 @@
-<ul>
+<form method="post" action="/messages/create">
+	<select id="user_params[user_id]" name="user_params[user_id]">
+		<option value="1">Saeed</option>
+		<option value="2">Amir</option>
+		<option value="3">Sadegh</option>
+		<option value="4">Hamed</option>
+	</select>
+	<input type="text" id="user_params[msg]" name="user_params[msg]" />
+	<input type="submit" />
+</form>
 
-<% @messages.each do |message| %> 
+<ul>
+<% @messages.reverse.each do |message| %> 
   <li>
   	<p><%= @our_names[ message["user_id"]] %></p>
   	<p> <%= message["msg"] %> </p>
@@ -8,3 +18,4 @@
   </li>
 <% end %>
 </ul>
+
