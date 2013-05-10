@@ -1,5 +1,8 @@
 KelasiTline::Application.routes.draw do
   get "messages/index"
+  post "messages/create"
+
+  root to: "messages#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
