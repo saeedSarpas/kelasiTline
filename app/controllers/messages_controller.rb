@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
 
   def index
-	  @our_names = { 1 => "Saeed", 2 => "Amir", 3 => "Sadegh", 4 => "Hamed" }
+	  @our_names = { 1 => "Saeed", 2 => "Amir", 3 => "Sadegh", 4 => "Hamed", 5 => "Pouria" }
   	@messages = Messages.all
   end
 
