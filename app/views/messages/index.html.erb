@@ -10,7 +10,8 @@
 			<option value="3">Sadegh</option>
 			<option value="4">Hamed</option>
 		</select><br />
-		<input class="round" type="text" id="user_params[msg]" name="user_params[msg]" />
+		<input id="user_msg_in" class="round" type="text" id="user_params[msg]" name="user_params[msg]" onkeypress="return keyPress(event,'user_msg_in');"/> 
+		<!--  onkeypress="return keyPress(event,'user_msg_in');"" -->
 		<input class="round button fontFamily textShadow_a" type="submit" value="Submit Query" />
 	</form>
 
@@ -34,7 +35,9 @@
 	</div>
 
 	<div class="bgY" style="height:70px; margin-top:-50px;"></div>
-	<div style="height:70px; padding-left:87px;"><%= image_tag( 'big-dot.png', :alt => "End") %></div>
+	<div style="height:70px; padding:0px 0px 0px 87px;"><%= image_tag( 'big-dot.png', :alt => "End") %> 
+		<span class="fontFamily copyRight">kelasiTline &copy 2013</span>
+	</div>
 
 </div>
 
