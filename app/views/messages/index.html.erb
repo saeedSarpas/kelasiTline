@@ -1,21 +1,40 @@
-<form method="post" action="/messages/create">
-	<select id="user_params[user_id]" name="user_params[user_id]">
-		<option value="1">Saeed</option>
-		<option value="2">Amir</option>
-		<option value="3">Sadegh</option>
-		<option value="4">Hamed</option>
-	</select>
-	<input type="text" id="user_params[msg]" name="user_params[msg]" />
-	<input type="submit" />
-</form>
+<div id="container" class="container fontFamily">
+	<div class="vLine">
+		<%= image_tag( 'big-dot.png', :alt => "Beginning", :class => 'bigDot') %>
+	</div>
 
-<ul>
-<% @messages.reverse.each do |message| %> 
-  <li>
-  	<p><%= @our_names[ message["user_id"]] %></p>
-  	<p> <%= message["msg"] %> </p>
-  	<p> <%= message["created_at"] %> </p>
-  </li>
-<% end %>
-</ul>
+	<form method="post" action="/messages/create" class="formPos">
+		<select class="select" id="user_params[user_id]" name="user_params[user_id]">
+			<option value="1">Saeed</option>
+			<option value="2">Amir</option>
+			<option value="3">Sadegh</option>
+			<option value="4">Hamed</option>
+		</select><br />
+		<input class="round" type="text" id="user_params[msg]" name="user_params[msg]" />
+		<input class="round button fontFamily textShadow_a" type="submit" value="Submit Query" />
+	</form>
+
+	<div style="height:160px;"></div>
+	<div id="messagesBox" class="messagesBox bgY">
+		<ul>	
+			<% @messages.reverse.each do |message| %> 
+
+			 	<div class="dot"></div>
+			  
+			 	<% pic_address = @our_names[ message["user_id"]] + ".jpg" %>
+			 	<%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic') %>
+
+			 	<li class="shiftRight">
+			  		<p><%= @our_names[ message["user_id"]] + " | " + message["created_at"].to_s %></p>
+			  		<p> <%= message["msg"] %> </p>
+				</li>
+
+			<% end %>
+		</ul>
+	</div>
+
+	<div class="bgY" style="height:70px; margin-top:-50px;"></div>
+	<div style="height:70px; padding-left:87px;"><%= image_tag( 'big-dot.png', :alt => "End") %></div>
+
+</div>
 

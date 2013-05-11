@@ -13,3 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+function getElement(id) {
+	var element = null; 
+	if (document.getElementById)
+		element = document.getElementById(id);
+	else if (document.layers) 
+		element = document.layers[id];
+	else if (document.all)
+		element = document.all[id];
+	return element; 
+}
+	
