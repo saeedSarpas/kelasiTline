@@ -22,12 +22,16 @@
 			<% @messages.reverse.each do |message| %> 
 
 			 	<div class="dot"></div>
-			  
+				<% a = [] %>
+				<% a = message["created_at"].to_s.split(/[\s|\:|\ |-]/) %>
+
+
+
 			 	<% pic_address = @our_names[ message["user_id"]] + ".jpg" %>
-			 	<%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic') %>
+			 	<%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic round') %>
 
 			 	<li class="shiftRight">
-			  		<p><%= @our_names[ message["user_id"]] + " | " + message["created_at"].to_s %></p>
+			  		<p><%= @our_names[ message["user_id"]]  %></p>
 			  		<p> <%= message["msg"] %> </p>
 				</li>
 
