@@ -1,9 +1,8 @@
-<div id="container" class="container fontFamily">
+<div id="tLine" class="tLine fontFamily">
 	<div class="vLine">
 		<%= image_tag( 'big-dot.png', :alt => "Beginning", :class => 'bigDot') %>
 	</div>
-
-	<form method="post" action="/messages/create" class="formPos">
+	<form id="submit_form" method="post" action="/messages/create" class="formPos">
 		<select class="select" id="user_params[user_id]" name="user_params[user_id]">
 			<option value="1">Saeed</option>
 			<option value="2">Amir</option>
@@ -11,38 +10,28 @@
 			<option value="4">Hamed</option>
 			<option value="5">Pouria</option>
 		</select><br />
-		<input id="user_msg_in" class="round" type="text" id="user_params[msg]" name="user_params[msg]" onkeypress="return keyPress(event,'user_msg_in');"/> 
-		<!--  onkeypress="return keyPress(event,'user_msg_in');"" -->
-		<input class="round button fontFamily textShadow_a" type="submit" value="Submit Query" />
+		<input id="user_params[msg]" type="text" name="user_params[msg]" class="roundLeft textBox" /> 
+		<input class="roundRight button fontFamily" type="submit" value="Submit Query" />
 	</form>
-
-	<div style="height:160px;"></div>
+	<div class="blankBox"></div>
 	<div id="messagesBox" class="messagesBox bgY">
+		<div class="messageBoxBg op-60"></div>
 		<ul>	
 			<% @messages.reverse.each do |message| %> 
-
 			 	<div class="dot"></div>
 				<% a = [] %>
 				<% a = message["created_at"].to_s.split(/[\s|\:|\ |-]/) %>
-
-
-
 			 	<% pic_address = @our_names[ message["user_id"]] + ".jpg" %>
 			 	<%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic round') %>
-
 			 	<li class="shiftRight">
-			  		<p><%= @our_names[ message["user_id"]]  %></p>
+			  		<p class="msgAuthor"><%= @our_names[ message["user_id"]] + " at " + a[3] + ":" + a[4] %></p> 
 			  		<p> <%= message["msg"] %> </p>
 				</li>
-
 			<% end %>
 		</ul>
 	</div>
-
-	<div class="bgY" style="height:70px; margin-top:-50px;"></div>
-	<div style="height:70px; padding:0px 0px 0px 87px;"><%= image_tag( 'big-dot.png', :alt => "End") %> 
+	<div class="bgY footerVline"></div>
+	<div class="footer"><%= image_tag( 'big-dot.png', :alt => "End") %> 
 		<span class="fontFamily copyRight">kelasiTline &copy 2013</span>
 	</div>
-
 </div>
-

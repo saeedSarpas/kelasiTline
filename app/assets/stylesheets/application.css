@@ -11,52 +11,49 @@
  *= require_self
  *= require_tree .
  */
-html {
-	height: 100%;
-}
 
-body {
+html, body {
 	height: 100%;
+	width: 100%;
 	min-height: 100%;
 	margin: 0;
 	background-color: #eee;
 }
 
- .container {
- 	position: absolute;
- 	top: 0px;
- 	left: 50%;
- 	margin: 0 0 0 -250px;
- 	padding: 80px 0 0 0;
- 	width: 600px;
- 	height: 1em;
- 	min-height: 100%;
- 	/*background-color: #ddd;*/
- 	background: transparent;
- 	z-index: 1;
- }
+.tLine {
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	margin: 0 0 0 -280px;
+	padding: 80px 0 0 0;
+	width: 560px;
+	height: 1em;
+	min-height: 100%;
+	background: transparent;
+	z-index: 1;
+}
 
- .vLine {
- 	position: absolute;
- 	top: 80px;
- 	left: 94px;
- 	min-width: 2px;
- 	width: 2px;
- 	max-width: 2px;
- 	height: 100%;
- 	min-height: 100%;
- 	background-color: #aaa;
- 	z-index: 1;
- }
+.vLine {
+	position: absolute;
+	top: 80px;
+	left: 94px;
+	min-width: 2px;
+	width: 2px;
+	max-width: 2px;
+	height: 100%;
+	min-height: 100%;
+	background-color: #aaa;
+	z-index: 1;
+}
 
- .dot {
- 	position: relative;
- 	top: 30px;
- 	margin-left: 50px;
- 	width: 10px;
- 	height: 10px;
- 	background: url('dot.png');
- }
+.dot {
+	position: relative;
+	top: 30px;
+	margin-left: 50px;
+	width: 10px;
+	height: 10px;
+	background: url('dot.png');
+}
 
 .bigDot {
 	position: absolute;
@@ -64,57 +61,36 @@ body {
 	left: -7px;
 }
 
- .shiftRight {
- 	margin-left: 70px;
- }
+.shiftRight {
+	margin-left: 70px;
+}
 
- .profilePic {
- 	position: absolute;
- 	left: 0px;
- }
+.profilePic {
+	position: absolute;
+	left: 0px;
+}
 
- .fontFamily {
- 	font-family: UnDotum;
- }
+.fontFamily {
+	font-family: ubuntu;
+}
 
- .bgY {
- 	background: url('vLine.png');
- 	background-repeat: repeat-y;
- }
+.bgY {
+	background: url('vLine.png');
+	background-repeat: repeat-y;
+}
 
-/* .lightHeader {
- 	position: absolute;
- 	top: 10px;
+.darkHeader {
+	position: absolute;
+	top: 10px;
 	left: 50%;
-	margin-left: -310px;
-	width:560px;
-	height: 27px;
-	padding: 10px 30px 5px 40px;
-	background-color: #eee;
-	background: -webkit-gradient(linear, left top, left bottom, from(#e4e4e4), to(#a2a2a2));
-	background: -moz-linear-gradient(top,  #e4e4e4,  #a2a2a2);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e4e4e4', endColorstr='#a2a2a2');
-	color: #000;
-	text-align: left;
-	vertical-align: middle;
-	z-index: 2;
- }*/
-
- .darkHeader {
- 	position: absolute;
- 	top: 10px;
-	left: 50%;
-	margin-left: -310px;
-	width:550px;
-	height: 27px;
-	padding: 10px 30px 5px 40px;
-	background-color: #aaa;
-	background: -webkit-gradient(linear, left top, left bottom, from(#a4a4a4), to(#727272));
-	background: -moz-linear-gradient(top,  #a4a4a4,  #727272);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a4a4a4', endColorstr='#727272');
+	margin-left: -480px;
+	width:960px;
+	height: 39px;
+	background-color: #a4a4a4;
 	color: #fff;
 	text-align: center;
 	vertical-align: middle;
+	overflow: hidden;
 	z-index: 3;
 }
 
@@ -124,14 +100,52 @@ body {
 	border-radius:          5px;
 }
 
-ul {
-  list-style: none;
+.roundRight {
+	-moz-border-radius:     0 5px 5px 0 ;
+	--webkit-border-radius: 0 5px 5px 0 ;
+	border-radius:          0 5px 5px 0 ;
+}
+
+.roundLeft {
+	-moz-border-radius:     5px 0 0 5px ;
+	--webkit-border-radius: 5px 0 0 5px ;
+	border-radius:          5px 0 0 5px ;
+}
+
+#messageBox li  {
+	list-style: none;
 }
 
 .formPos {
 	position: relative;
 	top: 100px;
 	left: 105px;
+}
+
+.textBox {
+	border: 1px solid #2e75ce;
+	border-right: 0;
+	height: 39px;
+	width: 260px;
+	direction: ltr;
+	padding: 0 10px 0 7px;
+	overflow: hidden;
+}
+
+.button {
+	padding: 0 0 2px 0;
+	margin-left: -8px;
+	text-align: center;
+	width: 110px;
+	max-width: 110px;
+	height: 41px;
+	font-size: 14px;
+	color: #2e75ce;
+	background-color: #eee;
+	border: 1px solid #2e75ce;
+	border-left: 1px dashed #2e75ce;
+	cursor: pointer;
+	overflow: hidden;
 }
 
 .messagesBox {
@@ -141,12 +155,10 @@ ul {
 	max-width: 550px;
 }
 
-input {
-	width: 260px;
-	max-width: 260px;
-	direction: ltr;
-	padding: 10px 10px 10px 10px;
-	border: 1px solid #aaa;
+.messagesBoxBg {
+	background-color: #000;
+	width: 100%;
+	height: 100%;
 }
 
 select {
@@ -154,18 +166,12 @@ select {
 	margin-bottom: 7px;
 }
 
-.button {
-	padding: 9px 3px 9px 3px;
-	text-align: center;
-	width: 110px;
-	max-width: 110px;
-	font-size: 14px;
-	border: none;
-	color: #fff;
-	background-color: #38adee;
-	background: -webkit-gradient(linear, left top, left bottom, from(#38adee), to(#2e75ce));
-	background: -moz-linear-gradient(top,  #38adee,  #2e75ce);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#38adee', endColorstr='#2e75ce');	
+.blankBox {
+	height: 160px;
+}
+
+.bgTrans {
+	background-color: transparent;
 }
 
 p {
@@ -200,12 +206,32 @@ p {
 	color: #aaa;
 }
 
-textarea.rtl
-{
-  direction:rtl;
+.msgAuthor {
+	font-size: 14px;
+	font-weight: normal;
+	color: #888;
 }
 
-textarea.ltr
-{
-  direction:ltr;
+.title {
+	margin-top: 10px;
+	color: #eee;
+}
+
+li {
+	min-height: 45px;
+}
+
+li hr {
+	margin: -13px 0 0 0;
+	width:395px; 
+}
+
+.footerVline {
+	height:70px;
+	margin-top:-50px;
+}
+
+.footer {
+	height:70px;
+	padding:0px 0px 0px 87px;
 }

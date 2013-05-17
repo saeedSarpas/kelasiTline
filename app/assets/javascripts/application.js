@@ -12,65 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 
-function getElement(id) {
-	var element = null; 
-	if (document.getElementById)
-		element = document.getElementById(id);
-	else if (document.layers) 
-		element = document.layers[id];
-	else if (document.all)
-		element = document.all[id];
-	return element; 
-}
-
-// $('input').keyup(function(){
-//     $this = $(this);
-//     if($this.val().length == 1)
-//     {
-//         var x =  new RegExp("[\x00-\x80]+"); // is ascii
-        
-//         //alert(x.test($this.val()));
-        
-//         var isAscii = x.test($this.val());
-        
-//         if(isAscii)
-//         {
-//             $this.css("direction", "ltr");
-//         }
-//         else
-//         {
-//             $this.css("direction", "rtl");
-//         }
-//     }
-        
-// });
-
-function keyPress(event,element) {        
-	var el = getElement(element);
-	var value = el.value;
-	value = value.replace(/ /g,'');
-	var err = 0;
-	if (value.length == 3) {
-		var letters = new Array();
-		var reg = new RegExp("[\u0600-\u06FF]");       //"[\x00-\x80]+");
-		for (var i=0; i<3; i++){
-			letters[i] = value.charAt(i);
-			if( reg.test(letters[i]) ) { // 
-				err = err +1;
-			} else {
-				err = err -1;
-			}
+$(function() {
+	$('.textBox').keypress(function(e){
+		var $this = $(this);
+		var value = e.charCode;
+		var pDetect = 0;
+		if ($this.val().length < 1) {
+			console.log('detected')
+			if (value >= 0x600 && value <= 0x6ff)
+				$this.css("direction", "rtl")
+			else
+				$this.css("direction", "ltr")
 		}
-	}
-
-	if ( err>=3 ) {
-		el.style.direction = "rtl";
-	}
-	if ( err<=-3 ) {
-		el.style.direction = "ltr";
-	}
-
-}
-	
+	});
+});
