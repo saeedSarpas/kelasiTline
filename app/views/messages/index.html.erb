@@ -1,4 +1,4 @@
-<div id="tLine" class="tLine fontFamily">
+	<div id="tLine" class="tLine fontFamily">
 	<div class="vLine">
 		<%= image_tag( 'big-dot.png', :alt => "Beginning", :class => 'bigDot') %>
 	</div>
@@ -11,7 +11,7 @@
 			<option value="5">Pouria</option>
 		</select><br />
 		<input id="user_params[msg]" type="text" name="user_params[msg]" class="roundLeft textBox" /> 
-		<input id="submitButton" class="roundRight button fontFamily" type="submit" value="Submit Query" />
+		<input id="submitButton" class="roundRight button fontFamily" type="submit" value="Submit Query" onmouseover="mouseoverButtonOver();" onmouseout="mouseoverButtonOut();"/>
 	</form>
 	<div class="blankBox"></div>
 	<div id="messagesBox" class="messagesBox bgY">
