@@ -161,7 +161,7 @@ html, body {
 	height: 100%;
 }
 
-select {
+.select {
 	padding: 2px 3px 3px 3px ;
 	margin-bottom: 7px;
 }
@@ -234,4 +234,123 @@ li hr {
 .footer {
 	height:70px;
 	padding:0px 0px 0px 87px;
+}
+
+.replyBox {
+	margin-left: 80px;
+	font-size: 12px;
+	color: #888;
+	background-color: #d6d6d6;
+	list-style: none;
+}
+
+.replyPic {
+	position: absolute;
+	margin: 10px 10px 10px 10px ;
+}
+
+.replyMsgBox {
+	padding: 2px 20px 10px 55px;
+	margin-bottom: 10px;
+}
+
+.repTimeBox {
+	padding: 8px 20px 10px 55px;
+}
+
+.commentBox {
+	margin: 0 0 20px 80px;
+}
+
+.repSelect {
+	text-align: center;
+	vertical-align: middle;
+	float: left;
+	width: 60px;
+	max-width: 60px;
+	height: 31px;
+	font-size: 12px;
+	color: #000;
+	background: url('arrow.png') no-repeat right transparent;
+	border: 1px solid #aaa;
+	border-right: 0px;
+	cursor: pointer;
+	overflow: hidden;
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline-color: #aaa;
+	outline-style: none;
+}
+
+.repSelect:hover {
+	border: 1px solid #aaa;
+	border-right: 0px;
+}
+
+.repSelect:focus {
+	border: 1px solid #aaa;
+	border-right: 0px;
+}
+
+.repSelect:active {
+	border: 1px solid #aaa;
+	border-right: 0px;
+}
+
+.repTextBox {
+	border: 1px solid #aaa;
+	border-right: 0;
+	border-left: 0;
+	margin-left: 0;
+	margin-left: -3px;
+	height: 29px;
+	width: 240px;
+	direction: ltr;
+	padding: 0 10px 0 13px;
+	overflow: hidden;
+	background: transparent;
+	outline-color: #aaa;
+	outline-style: none;
+}
+
+.repTextBox:hover {
+	border: 1px solid #aaa;
+	border-right: 0;
+	border-left: 0;
+}
+
+.repTextBox:focus {
+	border: 1px solid #aaa;
+	border-right: 0;
+	border-left: 0;
+}
+
+.repTextBox:active {
+	border: 1px solid #aaa;
+	border-right: 0;
+	border-left: 0;
+}
+
+.repButton {
+	float: right;
+	padding: 0 0 0 0;
+	margin-left: -8px;
+	text-align: center;
+	width: 110px;
+	max-width: 110px;
+	height: 31px;
+	font-size: 12px;
+	color: #000;
+	background-color: #eee;
+	border: 1px solid #aaa;
+	border-left: 1px dashed #aaa;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.invisible {
+	visibility: hidden;
+	width: 0px;
+	height: 0px
 }
