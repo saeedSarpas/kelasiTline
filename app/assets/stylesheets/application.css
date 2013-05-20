@@ -71,7 +71,7 @@ html, body {
 }
 
 .fontFamily {
-	font-family: ubuntu;
+	font-family: ubuntu, Verdana, Trebuchet MS;
 }
 
 .bgY {
@@ -238,9 +238,10 @@ li hr {
 
 .replyBox {
 	margin-left: 80px;
+	margin-bottom: 15px;
 	font-size: 12px;
-	color: #888;
-	background-color: #d6d6d6;
+	color: #555;
+	border: 1px solid #ccc;
 	list-style: none;
 }
 
@@ -250,7 +251,7 @@ li hr {
 }
 
 .replyMsgBox {
-	padding: 2px 20px 10px 55px;
+	padding: 2px 20px 5px 55px;
 	margin-bottom: 10px;
 }
 
