@@ -12,4 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+
+$(function() {
+	$('.textBox').keypress(function(e){
+		var $this = $(this);
+		var value = e.charCode;
+		var pDetect = 0;
+		if ($this.val().length < 1) {
+			console.log('detected')
+			if (value >= 0x600 && value <= 0x6ff)
+				$this.css("direction", "rtl")
+			else
+				$this.css("direction", "ltr")
+		}
+	});
+});
