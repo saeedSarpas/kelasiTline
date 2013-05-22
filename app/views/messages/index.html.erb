@@ -15,18 +15,20 @@
 	</form>
 	<div class="blankBox"></div>
 	<div id="messagesBox" class="messagesBox bgY">
-		<div class="messageBoxBg op-60"></div>
 		<ul>	
 			<% @messages.reverse.each do |message| %> 
-			 	<div class="dot"></div>
-				<% a = [] %>
-				<% a = message["created_at"].to_s.split(/[\s|\:|\ |-]/) %>
-			 	<% pic_address = @our_names[ message["user_id"]] + ".jpg" %>
-			 	<%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic round') %>
-			 	<li class="shiftRight">
-			  		<p class="msgAuthor"><%= @our_names[ message["user_id"]] + " at " + a[3] + ":" + a[4] %></p> 
-			  		<p> <%= message["msg"] %> </p>
-				</li>
+				<div class="msgblock">
+				 	<div class="dot"></div>
+					<% a = [] %>
+					<% a = message["created_at"].to_s.split(/[\s|\:|\ |-]/) %>
+				 	<% pic_address = @our_names[ message["user_id"]] + ".jpg" %>
+				 	<%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic round') %>
+				 	<li class="shiftRight">
+				  		<p class="msgAuthor"><%= @our_names[ message["user_id"]] + " at " + a[3] + ":" + a[4] %></p> 
+				  		<div class="msgContainer"> <%= message["msg"] %> </div>
+					</li>
+				</div>
+
 				<% reply=Reply.find(:all, :conditions => ["msg_id = ?", message['id']]) %>
 				<% reply.each do |reply| %>
 					<li class="replyBox">

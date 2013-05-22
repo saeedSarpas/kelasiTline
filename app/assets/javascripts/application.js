@@ -27,45 +27,15 @@ $(function() {
 	});
 });
 
-// $(function() {
-// 	$("#submitButton").mouseover(function(e){
-// 		var $this = $(this);
-// 		$this.animate({backgroundColor: "#2e75ce"}, 100 );
-// 		$this.css("color", "#eee");
-// 	})
-// 	$("#submitButton").mouseout(function(e){
-// 		var $this = $(this);
-// 		$this.css("background-color", "#eee");
-// 		$this.css("color", "#2e75ce");
-// 	})
-// });
-
-function $(id) {
-	var element = null; 
-	if (document.getElementById)
-		element = document.getElementById(id);
-	else if (document.layers) 
-		element = document.layers[id];
-	else if (document.all)
-		element = document.all[id];
-	return element; 
-}
-
-function mouseoverButtonOver() {		
-	var element = Array();
-	element[0] = "submitButton";
-	$(element[0]).style.color="#eee"
-	init(element, 100, -1, "#eeeeee", "#2e75ce");
-}
-
-function mouseoverButtonOut() {		
-	var element = Array();
-	element[0] = "submitButton";
-	$(element[0]).style.color="#2e75ce"
-	init(element, 100, 1, "#eeeeee", "#2e75ce");
-}
-
-
-
-
-
+$(function() {
+	$("#submitButton").mouseover(function(e){
+		var $this = $(this);
+		$this.animate({backgroundColor: "#2e75ce"}, 100 );
+		$this.css("color", "#eee");
+	})
+	$("#submitButton").mouseout(function(e){
+		var $this = $(this);
+		$this.css("background-color", "#eee");
+		$this.css("color", "#2e75ce");
+	})
+});
