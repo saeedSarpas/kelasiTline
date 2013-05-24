@@ -1,11 +1,11 @@
 KelasiTline::Application.routes.draw do
   get "pages/timeline"
 
-  get "messages/index"
-  post "messages/create"
-  post "messages/reply"
+  get "posts/index"
+  post "posts/create"
+  post "posts/reply"
 
-  root to: "messages#index"
+  root to: "posts#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

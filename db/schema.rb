@@ -11,23 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523110219) do
+ActiveRecord::Schema.define(:version => 20130524134053) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.text     "msg"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "parent",     :default => 0
   end
 
-  create_table "replies", :force => true do |t|
-    t.integer  "msg_id"
-    t.integer  "user_id"
-    t.text     "reply"
-    t.integer  "dir"
-    t.integer  "gold"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+  add_index "posts", ["created_at"], :name => "index_posts_on_created_at"
+  add_index "posts", ["parent"], :name => "index_posts_on_parent"
 
 end
