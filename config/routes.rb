@@ -1,4 +1,6 @@
 KelasiTline::Application.routes.draw do
+  get "pages/timeline"
+
   get "messages/index"
   post "messages/create"
   post "messages/reply"

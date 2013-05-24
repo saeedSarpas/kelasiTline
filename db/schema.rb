@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520000024) do
+ActiveRecord::Schema.define(:version => 20130523110219) do
 
-  create_table "messages", :force => true do |t|
+  create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.text     "msg"
     t.datetime "created_at", :null => false
