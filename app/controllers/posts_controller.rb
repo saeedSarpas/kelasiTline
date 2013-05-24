@@ -1,12 +1,12 @@
-class MessagesController < ApplicationController
+class PostsController < ApplicationController
 
   def index
 	  @our_names = { 1 => "Saeed", 2 => "Amir", 3 => "Sadegh", 4 => "Hamed", 5 => "Pouria" }
-  	@messages = Messages.all
+  	@posts = Post.all
   end
 
   def create
-    @message = Messages.new params[:user_params]
+    @message = Post.new params[:user_params]
     @message.save
     # render json: @message
     redirect_to root_path

@@ -2,7 +2,7 @@
 	<div class="vLine">
 		<%= image_tag( 'big-dot.png', :alt => "Beginning", :class => 'bigDot') %>
 	</div>
-	<form id="messageForm" method="post" action="/messages/create" class="formPos">
+	<form id="messageForm" method="post" action="/posts/create" class="formPos">
 		<select class="select fontFamily" id="user_params[user_id]" name="user_params[user_id]">
 			<option value="1">Saeed</option>
 			<option value="2">Amir</option>
@@ -16,7 +16,7 @@
 	<div class="blankBox"></div>
 	<div id="messagesBox" class="messagesBox bgY">
 		<ul>	
-			<% @messages.reverse.each do |message| %> 
+			<% @posts.reverse.each do |message| %> 
 				<div class="msgblock">
 				 	<div class="dot"></div>
 					<% a = [] %>
@@ -45,7 +45,7 @@
 					</li>
 				<% end %>
 				<div class="commentBox op-50">
-					<form id="replyForm" method="post" action="/messages/reply">
+					<form id="replyForm" method="post" action="/posts/reply">
 						<select class="repSelect roundLeft fontFamily" id="replier_params[user_id]" name="replier_params[user_id]" name="replier_params[user_id]">
 							<option value="1">Saeed</option>
 							<option value="2">Amir</option>
