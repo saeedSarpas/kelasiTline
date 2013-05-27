@@ -427,10 +427,9 @@ li hr {
     overflow: hidden;
 }
 
-.invisible {
-    visibility: hidden;
-    width: 0px;
-    height: 0px
+.right2left {
+    direction: rtl;
+    text-align: right;
 }
 
 .msgContainer {
