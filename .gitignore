@@ -16,5 +16,7 @@
 
 .powenv
 .rvmrc
-.ruby-version
+
 .ruby-gemset
+.ruby-version
+
