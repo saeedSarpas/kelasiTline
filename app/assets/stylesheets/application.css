@@ -103,13 +103,13 @@ html, body {
 
 .roundRight {
     -moz-border-radius: 0 5px 5px 0;
-    --webkit-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
     border-radius: 0 5px 5px 0;
 }
 
 .roundLeft {
     -moz-border-radius: 5px 0 0 5px;
-    --webkit-border-radius: 5px 0 0 5px;
+    -webkit-border-radius: 5px 0 0 5px;
     border-radius: 5px 0 0 5px;
 }
 
