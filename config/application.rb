@@ -61,5 +61,6 @@ module KelasiTline
 
     # To precompile other assets
     config.assets.precompile += ['.css', '.js']
+    config.assets.precompile += ['jquery.color-2.1.2.min.js']
   end
 end
