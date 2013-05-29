@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527195114) do
+ActiveRecord::Schema.define(:version => 20130529045719) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -24,5 +24,11 @@ ActiveRecord::Schema.define(:version => 20130527195114) do
 
   add_index "posts", ["created_at"], :name => "index_posts_on_created_at"
   add_index "posts", ["parent"], :name => "index_posts_on_parent"
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
