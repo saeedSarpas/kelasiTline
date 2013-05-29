@@ -12,4 +12,18 @@ describe Post do
 		Post.create {|q| q.parent_id = p.id }
 		p.replies.count.should == 1
 	end
+
+	it "Should sort by 'created_at desc' by default" do
+		p1 = Post.create {|q| q.id = 1}
+		p2 = Post.create {|q| q.id = 2}
+		Post.first(2).should == [p2, p1]
+	end
+
+	it "Should have recent posts" do
+		ps = []
+		30.times do |i|
+			ps << Post.create
+		end
+		Post.recent_posts(10).should == ps.last(10).reverse
+	end
 end
