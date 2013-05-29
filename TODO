@@ -1,5 +1,6 @@
  ☐ Fix highlight effect
  ☐ Create User model
+ ☐ Fix Post model relationship
  ☐ Make it use gravatar
  ☐ Port to Haml
  ☐ Port to coffeescript

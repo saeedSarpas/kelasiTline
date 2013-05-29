@@ -28,18 +28,3 @@ $(function() {
         }
     });
 });
-
-$(function() {
-    $("#submitButton").mouseover(function(e) {
-        var $this = $(this);
-        $this.animate({
-            backgroundColor: "#2e75ce"
-        }, 500);
-        $this.css("color", "#eee");
-    })
-    $("#submitButton").mouseout(function(e) {
-        var $this = $(this);
-        $this.css("background-color", "#eee");
-        $this.css("color", "#2e75ce");
-    })
-});
