@@ -1,4 +1,8 @@
  ☐ Fix highlight effect
  ☐ Create User model
+ ☐ Make it use gravatar
+ ☐ Port to Haml
+ ☐ Port to coffeescript
+ ☐ Use RGBa background
  ☐ Make it RESTful
  ☐ Use js MVC frameworks
