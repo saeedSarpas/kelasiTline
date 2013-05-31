@@ -8,14 +8,17 @@ gem 'rails', '3.2.13'
 
 group :development do
   gem 'sqlite3'
+  gem 'guard'
+  gem 'ruby_gntp'
 end
 
 group :production do
-  gem "pg"
+  gem 'pg'
 end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'spork-rails'
 end
 
 
@@ -33,10 +36,6 @@ end
 
 gem 'jquery-rails'
 
-group :test, :development do
-	gem "rspec-rails"
-  gem "spork-rails"
-end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -53,4 +52,4 @@ end
 # To use debugger
 # gem 'debugger'
 
-gem "thin"
+gem 'thin'
