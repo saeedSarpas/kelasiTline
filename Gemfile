@@ -10,6 +10,8 @@ group :development do
   gem 'sqlite3'
   gem 'guard'
   gem 'ruby_gntp'
+  gem 'guard-spork'
+  gem 'guard-rspec'
 end
 
 group :production do
