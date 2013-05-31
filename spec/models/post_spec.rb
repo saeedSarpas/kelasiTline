@@ -26,4 +26,9 @@ describe Post do
 		end
 		Post.recent_posts(10).should == ps.last(10).reverse
 	end
+
+	it "should have a user" do
+		p = Post.create user_id: 1
+		p.user.should == User.find(1)
+	end
 end

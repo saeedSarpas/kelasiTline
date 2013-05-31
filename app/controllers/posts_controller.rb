@@ -1,17 +1,9 @@
 class PostsController < ApplicationController
 
+  before_filter :auth
+
   def index
-	  @our_names = { 1 => "Saeed", 2 => "Amir", 3 => "Sadegh", 4 => "Hamed", 5 => "Pouria" }
-  	@posts = Post.order("created_at DESC").limit(20).where("parent=0")
-    q = ""
-    @posts.each do |post|
-      if q != ""
-        q = "#{q} or parent = #{post.id}" 
-      else
-        q = "parent = #{post.id}"
-      end
-    end
-    @replies = Post.order("created_at").where(q)
+  	@posts = Post.recent_posts.includes(:user, replies: :user)
   end
 
   def create
@@ -19,4 +11,12 @@ class PostsController < ApplicationController
     @message.save
     redirect_to root_path
   end
+
+  private
+
+  	def auth
+       unless logged_in?
+      		redirect_to login_path, note: "You need to log in first"
+        end
+  	end
 end
