@@ -13,6 +13,10 @@ group :development do
   gem 'guard-rspec'
 end
 
+group :development, :darwin do
+  gem 'terminal-notifier-guard'
+end
+
 group :production do
   gem 'pg'
 end
