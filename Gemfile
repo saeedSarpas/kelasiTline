@@ -9,7 +9,6 @@ gem 'rails', '3.2.13'
 group :development do
   gem 'sqlite3'
   gem 'guard'
-  gem 'ruby_gntp'
   gem 'guard-spork'
   gem 'guard-rspec'
 end
