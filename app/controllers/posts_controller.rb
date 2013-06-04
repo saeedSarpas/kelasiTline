@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def index
   	@posts = Post.recent_posts.includes(:user, replies: :user)
+    @user = session['user']
   end
 
   def create
@@ -17,6 +18,6 @@ class PostsController < ApplicationController
   	def auth
        unless logged_in?
       		redirect_to login_path, note: "You need to log in first"
-        end
+       end
   	end
 end

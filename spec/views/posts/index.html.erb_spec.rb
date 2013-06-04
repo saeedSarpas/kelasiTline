@@ -9,13 +9,16 @@ describe 'posts/index' do
 
   it 'should contain a logout link' do
     render
-
     expect(rendered).to have_link 'logout', href: '/logout'
   end
 
   it 'should contain the id of logged in user' do
     render
-
     expect(rendered).to have_selector %Q(input#user_id[value="1"])
+  end
+
+  it 'should contain the name of logged in user' do
+    render
+    expect(rendered).to have_content 'Saeed'
   end
 end

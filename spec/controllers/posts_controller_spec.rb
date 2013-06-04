@@ -4,7 +4,7 @@ describe PostsController do
 
 	context 'logged in' do
 
-		before { session['user'] = User.new }
+		before { session['user'] = mock_model(User) }
 		context 'index action' do
 
 			it "Should return success on GET 'index'" do
@@ -17,6 +17,11 @@ describe PostsController do
 				get 'index'
 				assigns(:posts).last.should == p
 			end
+
+      it "Should set @user with current user" do
+        get 'index'
+        expect(assigns :user).to eq session['user']
+      end
 		end
 	end
 
