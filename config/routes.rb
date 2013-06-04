@@ -4,6 +4,7 @@ KelasiTline::Application.routes.draw do
   resources :posts
   get 'login', to: 'pages#login', as: :login
   post 'login', to: 'pages#do_login'
+  get 'logout', to: 'pages#logout'
 
   root to: "posts#index"
 

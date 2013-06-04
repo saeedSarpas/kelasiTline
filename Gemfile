@@ -24,6 +24,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'spork-rails'
+  gem 'capybara'
 end
 
 

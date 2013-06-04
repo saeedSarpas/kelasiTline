@@ -26,4 +26,17 @@ describe PagesController do
   		session['user'].name.should == 'Saeed'
   	end
   end
+
+  context 'logout' do
+    
+    it 'should logout on GET /logout' do
+      get 'logout'
+      should_not be_logged_in
+    end
+
+    it 'should redirect to /' do
+      get 'logout'
+      response.should redirect_to root_path
+    end
+  end
 end
