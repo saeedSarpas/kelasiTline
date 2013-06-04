@@ -19,24 +19,24 @@
 				 	<div class="dot"></div>
 					<% a = [] %>
 					<% a = message["created_at"].to_s.split(/[\s|\:|\ |-]/) %>
-				 	<% pic_address = @our_names[ message["user_id"]] + ".jpg" %>
+				 	<% pic_address = message.user.name + ".jpg" %>
 				 	<% replyInputId = "replyInput" + message["id"].to_s %>
 				 	<% replyDirId = "replyDir" + message["id"].to_s %>
 				 	<%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic round') %>
 				 	<li class="shiftRight">
-				  		<p class="msgAuthor"><%= @our_names[ message["user_id"]] + " at " + a[3] + ":" + a[4] %></p> 
+				  		<p class="msgAuthor"><%= message.user.name + " at " + a[3] + ":" + a[4] %></p> 
 				  		<div class="msgContainer <%= "right2left" if (message['dir'] == 1) %>"> <%= message["msg"] %> </div>
 					</li>
 				</div>
 
-				<% @replies.select {|x| x.parent == message.id}.each do |reply| %>
+				<% message.replies.each do |reply| %>
 					<li class="replyBox">
-						<% pic_address = @our_names[ reply["user_id"]] + ".jpg" %>
+						<% pic_address = reply.user.name + ".jpg" %>
 						<%= image_tag(pic_address, :alt => "Profile Picture", :width => '30px', :height => '30px', :class => 'replyPic round') %>
 						<div class="repTimeBox">
 							<% rep = [] %>
 							<% repTime = reply["created_at"].to_s.split(/[\s|\:|\ |-]/) %>
-							<%= @our_names[reply["user_id"]] + " at " + repTime[3] + ":" + repTime[4] %>
+							<%= reply.user.name + " at " + repTime[3] + ":" + repTime[4] %>
 						</div>
 						<div class="replyMsgBox  <%= "right2left" if ( reply["dir"] == 1 ) %>">
 							<%= reply["msg"] %>

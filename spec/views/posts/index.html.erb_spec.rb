@@ -3,8 +3,15 @@ require 'spec_helper'
 describe 'posts/index' do
 
   before do
-    assign(:posts, [])
-    assign(:user, id: 1, name: 'Saeed')
+    user = mock_model(User, id: 1, name: 'Saeed')
+    post = mock_model(Post, user: user, created_at: Time.now)
+    assign(:posts, 
+           [mock_model(Post, 
+                       created_at: Time.now,
+                       user: user,
+                       replies: [post])
+    ])
+    assign(:user, user)
   end
 
   it 'should contain a logout link' do
