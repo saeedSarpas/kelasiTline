@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     @message = Post.new
     @message.user_id   = session['user'].id
     @message.msg       = params[:msg]
-    @message.parent_id = params[:parent_id]
+    @message.parent_id = params[:parent_id] if params[:parent_id].present?
     @message.dir       = params[:dir]
     @message.save
     redirect_to root_path
