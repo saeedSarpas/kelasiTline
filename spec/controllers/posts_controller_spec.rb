@@ -14,13 +14,13 @@ describe PostsController do
 			end
 
 			it "Should populate @posts with recent posts" do
-				p = Post.create
+				p = Post.create {|q| q.msg = "test"}
 				get 'index'
 				assigns(:posts).last.should == p
 			end
 
       it "Should assume posts with parent_id==nil also posts" do
-        p = Post.create {|q| q.parent_id = nil}
+        p = Post.create {|q| q.parent_id = nil; q.msg = "nil parent"}
         get 'index'
         assigns(:posts).last.should == p
       end
