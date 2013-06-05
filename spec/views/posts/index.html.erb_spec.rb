@@ -9,6 +9,7 @@ describe 'posts/index' do
            [mock_model(Post, 
                        created_at: Time.now,
                        user: user,
+                       msg: "test message",
                        replies: [post])
     ])
     assign(:user, user)
@@ -19,13 +20,13 @@ describe 'posts/index' do
     expect(rendered).to have_link 'logout', href: '/logout'
   end
 
-  it 'should contain the id of logged in user' do
-    render
-    expect(rendered).to have_selector %Q(input#user_id[value="1"])
-  end
-
   it 'should contain the name of logged in user' do
     render
     expect(rendered).to have_content 'Saeed'
+  end
+
+  it 'should contain the post.msg' do
+    render
+    expect(rendered).to have_content 'test message'
   end
 end

@@ -27,6 +27,11 @@ describe Post do
 		Post.recent_posts(10).should == ps.last(10).reverse
 	end
 
+  it "Should have post.parent_id==nil as recent_posts" do
+    p = Post.create {|q| q.parent_id = nil}
+    Post.recent_posts.should include p
+  end
+
 	it "should have a user" do
 		p = Post.create user_id: 1
 		p.user.should == User.find(1)
