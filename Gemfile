@@ -22,6 +22,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spork-rails'
   gem 'capybara'
+  gem 'jazz_hands'
 end
 
 
