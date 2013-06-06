@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
 
-  default_scope -> { order 'created_at desc' }
+  default_scope -> { order('created_at desc').where(status: 1) }
   scope :recent_posts, ->(num=20) { where(parent_id: [0, nil]).limit(num) }
 
   validates :msg, presence: true

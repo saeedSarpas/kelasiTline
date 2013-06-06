@@ -25,8 +25,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.where("id = #{params[:id]} or parent = #{params[:id]}")
-    @post.update_all(:status => 0)
+    @post = Post.find(params[:id])
+    @post.status = 0
+    @post.save
     redirect_to :back
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529082313) do
+ActiveRecord::Schema.define(:version => 20130606104030) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130529082313) do
     t.datetime "updated_at",                :null => false
     t.integer  "parent_id",  :default => 0
     t.integer  "dir",        :default => 0
+    t.integer  "status",     :default => 1
   end
 
   add_index "posts", ["created_at"], :name => "index_posts_on_created_at"
