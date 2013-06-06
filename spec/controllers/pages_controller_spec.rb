@@ -9,6 +9,14 @@ describe PagesController do
     end
   end
 
+  context "ng page" do
+
+    it "Should return success on GET '/ng'" do
+      get 'ng'
+      response.should be_success
+    end
+  end
+
   context "login page" do
 
   	it "Should return success" do
@@ -28,7 +36,7 @@ describe PagesController do
   end
 
   context 'logout' do
-    
+
     it 'should logout on GET /logout' do
       get 'logout'
       should_not be_logged_in
