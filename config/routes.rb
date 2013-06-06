@@ -3,7 +3,7 @@ KelasiTline::Application.routes.draw do
 
   get "posts/index"
   post "posts/create"
-  post "posts/reply"
+  post "posts/destroy"
 
   root to: "posts#index"
 

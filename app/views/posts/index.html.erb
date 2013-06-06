@@ -24,19 +24,23 @@
 					<% a = [] %>
 					<% a = message["created_at"].to_s.split(/[\s|\:|\ |-]/) %>
 				 	<% pic_address = @our_names[ message["user_id"]] + ".jpg" %>
-				 	<% replyInputId = "replyInput" + message["id"].to_s %>
-				 	<% replyDirId = "replyDir" + message["id"].to_s %>
 				 	<%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic round') %>
 				 	<li class="shiftRight">
-				  		<p class="msgAuthor"><%= @our_names[ message["user_id"]] + " at " + a[3] + ":" + a[4] %></p> 
-				  		<div class="msgContainer <%= "right2left" if (message['dir'] == 1) %>"> <%= message["msg"] %> </div>
+				 		<div class="deleteButton postDelButton"></div>
+				  		<p class="msgAuthor">
+				  			<%= @our_names[ message["user_id"]] + " at " + a[3] + ":" + a[4] %>
+				  		</p> 
+				  		<div class="msgContainer <%= "right2left" if (message['dir'] == 1) %>"> <%= message["msg"] %> 
+				  		</div>
+				  		<input type="hidden" value="<%= message['id'] %>" >
 					</li>
 				</div>
-
+				<div id="replyContailner">
 				<% @replies.select {|x| x.parent == message.id}.each do |reply| %>
 					<li class="replyBox">
 						<% pic_address = @our_names[ reply["user_id"]] + ".jpg" %>
 						<%= image_tag(pic_address, :alt => "Profile Picture", :width => '30px', :height => '30px', :class => 'replyPic round') %>
+						<div class="deleteButton"></div>
 						<div class="repTimeBox">
 							<% rep = [] %>
 							<% repTime = reply["created_at"].to_s.split(/[\s|\:|\ |-]/) %>
@@ -45,8 +49,10 @@
 						<div class="replyMsgBox  <%= "right2left" if ( reply["dir"] == 1 ) %>">
 							<%= reply["msg"] %>
 						</div>
+						<input type="hidden" value="<%= reply['id'] %>" >
 					</li>
 				<% end %>
+				
 				<div class="commentBox op-50">
 					<form id="replyForm" method="post" action="/posts/create">
 						<select class="repSelect roundLeft fontFamily" id="user_params[user_id]" name="user_params[user_id]" name="user_params[user_id]">
@@ -61,6 +67,7 @@
 						<input id="repSubmitButton" class="roundRight repButton fontFamily" type="submit" value="Reply"/><br />
 						<input id="user_params[parent]" name="user_params[parent]" type="hidden" value="<%= message['id'] %>" >
 					</form>
+				</div>
 				</div>
 			<% end %>
 

@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 $(function() {
-    $('input').bind("keypress", function(e) {
+    $('input').on("keypress", function(e) {
         var $this = $(this);
         var value = e.charCode;
         var pDetect = 0;
@@ -28,3 +28,22 @@ $(function() {
         }
     });
 });
+
+$(function() {
+    $('div.deleteButton').on('dblclick', function(e) {
+        $this = $(this)
+        var postId = $this.parent().children().last().val();
+        var jsonPOST = $.ajax({
+            type: 'post',
+            url: 'posts/destroy',
+            dataType: 'json',
+            data: {
+                id: postId
+            }
+        }).fail( function() {
+                alert("We unable to delete your post right now, Try again later.");
+            }).success( function(e) {
+                document.location.href='/';
+            });
+    })
+})

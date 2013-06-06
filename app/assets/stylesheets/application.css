@@ -453,3 +453,17 @@ li hr {
     color: #eee;
     background-color: #2e75ce;
 }
+
+.deleteButton {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    z-index: 3;
+}
+
+.postDelButton {
+    left: 90px;
+    margin-top: 6px;
+}
