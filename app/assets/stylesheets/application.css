@@ -17,7 +17,7 @@ html, body {
     width: 100%;
     min-height: 100%;
     margin: 0;
-    background-color: #eee;
+    background-color: #fafafa;
 }
 
 .tLine {
@@ -87,7 +87,8 @@ html, body {
     margin-left: -480px;
     width: 960px;
     height: 39px;
-    background-color: #a4a4a4;
+    background-color: #fff;
+    border: 1px solid #a4a4a4;
     color: #fff;
     text-align: center;
     vertical-align: middle;
@@ -291,7 +292,7 @@ p {
 
 .title {
     margin-top: 10px;
-    color: #eee;
+    color: #222;
 }
 
 li {
@@ -451,4 +452,18 @@ li hr {
 #submitButton:hover {
     color: #eee;
     background-color: #2e75ce;
+}
+
+.deleteButton {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    z-index: 3;
+}
+
+.postDelButton {
+    left: 90px;
+    margin-top: 6px;
 }

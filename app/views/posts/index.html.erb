@@ -25,13 +25,15 @@
 
           <% a = message["created_at"].to_s.split(/[\s:-]/) %>
           <% pic_address = message.user.name + ".jpg" %>
-          <% replyInputId = "replyInput#{message[:id]}" %>
-          <% replyDirId = "replyDir#{message[:id]}" %>
           <%= image_tag(pic_address, :alt => "Profile Picture", :class => 'profilePic round') %>
 
           <li class="shiftRight">
-            <p class="msgAuthor"><%= message.user.name + " at " + a[3] + ":" + a[4] %></p>
+				 		<div class="deleteButton postDelButton"></div>
+            <p class="msgAuthor">
+              <%= message.user.name + " at " + a[3] + ":" + a[4] %>
+            </p>
             <div class="msgContainer <%= "right2left" if (message['dir'] == 1) %>"> <%= message["msg"] %> </div>
+            <input type="hidden" value="<%= message['id'] %>" >
           </li>
         </div>
 
@@ -39,6 +41,7 @@
           <li class="replyBox">
             <% pic_address = reply.user.name + ".jpg" %>
             <%= image_tag(pic_address, :alt => "Profile Picture", :width => '30px', :height => '30px', :class => 'replyPic round') %>
+						<div class="deleteButton"></div>
             <div class="repTimeBox">
               <% repTime = reply["created_at"].to_s.split(/[\s:-]/) %>
               <%= reply.user.name + " at " + repTime[3] + ":" + repTime[4] %>
@@ -46,6 +49,7 @@
             <div class="replyMsgBox  <%= 'right2left' if ( reply[:dir] == 1 ) %>">
               <%= reply[:msg] %>
             </div>
+						<input type="hidden" value="<%= reply['id'] %>" >
           </li>
         <% end %>
 

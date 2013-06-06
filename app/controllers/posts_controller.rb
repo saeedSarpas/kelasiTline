@@ -5,6 +5,13 @@ class PostsController < ApplicationController
   def index
   	@posts = Post.recent_posts.includes(:user, replies: :user)
     @user = session['user']
+
+    ActiveRecord::Base.include_root_in_json = true
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @allPosts.to_json( except: ["updated_at"]) }
+    end
   end
 
   def create
@@ -15,6 +22,12 @@ class PostsController < ApplicationController
     @message.dir       = params[:dir]
     @message.save
     redirect_to root_path
+  end
+
+  def destroy
+    @post = Post.where("id = #{params[:id]} or parent = #{params[:id]}")
+    @post.update_all(:status => 0)
+    redirect_to :back
   end
 
   private
