@@ -39,6 +39,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'haml-rails'
 
 
 # To use ActiveModel has_secure_password
