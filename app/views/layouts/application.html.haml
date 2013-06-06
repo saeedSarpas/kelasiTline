@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title kelasiTline
+    = render 'layouts/stylesheets'
+    = render 'layouts/javascript'
+    = csrf_meta_tags
+
+  %body
+    - if Rails.env.development?
+      %pre{:style => "position:fixed;bottom:0"}= session.to_yaml
+
+    = render 'layouts/header'
+    = yield
