@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title kelasiTline
+    %title= "kelasiTline#{titleize yield :title}"
     = render 'layouts/stylesheets'
     = render 'layouts/javascript'
     = csrf_meta_tags
