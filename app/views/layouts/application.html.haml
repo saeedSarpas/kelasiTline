@@ -10,5 +10,8 @@
     - if Rails.env.development?
       %pre{:style => "position:fixed;bottom:0"}= session.to_yaml
 
-    = render 'layouts/header'
-    = yield
+    %header
+      = render 'layouts/header'
+
+    %section#body
+      = yield
