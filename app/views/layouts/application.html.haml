@@ -1,17 +1,32 @@
-!!!
-%html( ng-app )
-  %head
-    %title= "kelasiTline#{titleize yield :title}"
-    = render 'layouts/stylesheets'
-    = render 'layouts/javascript'
-    = csrf_meta_tags
+!!! 5
 
-  %body
-    - if Rails.env.development?
-      %pre{:style => "position:fixed;bottom:0"}= session.to_yaml
+= raw '<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->'
+= raw '<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->'
+= raw '<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->'
+= raw '<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->'
 
-    %header
-      = render 'layouts/header'
+%head
+  %meta( charset="utf-8" )
+  %meta( name="viewport" content="width=device-width, initial-scale=1.0" )
 
-    %section#body
-      = yield
+  %title= "kelasiTline#{content_for?(:title) ? titleize(yield :title) : ''}"
+
+  %link( href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300|Raleway' rel='stylesheet' type='text/css' )
+  = stylesheet_link_tag "application", :media => "all"
+
+  = javascript_include_tag "vendor/custom.modernizr"
+  = csrf_meta_tags
+
+%body
+  - if Rails.env.development?
+    %pre( style="position:fixed;bottom:0" )= session.to_yaml
+
+  %header
+    = render 'layouts/header'
+
+  %section#body
+    = yield
+
+  = javascript_include_tag "application"
+
+= raw "</html>"
