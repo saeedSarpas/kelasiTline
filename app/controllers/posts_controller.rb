@@ -1,20 +1,13 @@
 class PostsController < ApplicationController
 
+  before_filter :auth
+
   def index
-	  @our_names = { 1 => "Saeed", 2 => "Amir", 3 => "Sadegh", 4 => "Hamed", 5 => "Pouria" }
-  	@posts = Post.order("created_at DESC").limit(20).where("parent=0 and status=1")
-    q = ""
-    @posts.each do |post|
-      if q != ""
-        q = "#{q} or parent = #{post.id}" 
-      else
-        q = "parent = #{post.id}"
-      end
-      q= "#{q} and status=1"
-    end
-    @replies = Post.order("created_at DESC").where(q)
-    @allPosts = @posts+@replies
+  	@posts = Post.recent_posts.includes(:user, replies: :user)
+    @user = session['user']
+
     ActiveRecord::Base.include_root_in_json = true
+
     respond_to do |format|
       format.html
       format.json { render json: @allPosts.to_json( except: ["updated_at"]) }
@@ -22,14 +15,27 @@ class PostsController < ApplicationController
   end
 
   def create
-    @message = Post.new params[:user_params]
+    @message = Post.new
+    @message.user_id   = session['user'].id
+    @message.msg       = params[:msg]
+    @message.parent_id = params[:parent_id] if params[:parent_id].present?
+    @message.dir       = params[:dir]
     @message.save
-    redirect_to :back, :status => 301
+    redirect_to root_path
   end
 
   def destroy
-    @post = Post.where("id = #{params[:id]} or parent = #{params[:id]}")
-    @post.update_all(:status => 0)
+    @post = Post.find(params[:id])
+    @post.status = 0
+    @post.save
     redirect_to :back
   end
+
+  private
+
+  	def auth
+       unless logged_in?
+      		redirect_to login_path, note: "You need to log in first"
+       end
+  	end
 end

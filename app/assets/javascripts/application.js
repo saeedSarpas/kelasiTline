@@ -35,10 +35,10 @@ $(function() {
         var postId = $this.parent().children().last().val();
         var jsonPOST = $.ajax({
             type: 'post',
-            url: 'posts/destroy',
+            url: 'posts/'+postId,
             dataType: 'json',
             data: {
-                id: postId
+              _method: "DELETE"
             }
         }).fail( function() {
                 alert("We unable to delete your post right now, Try again later.");
