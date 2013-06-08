@@ -60,4 +60,5 @@ gem 'unicorn'
 # gem 'debugger'
 
 gem "rack-timeout", '~> 0.1.0beta2'
+gem 'heroku-deflater'
 
