@@ -12,12 +12,39 @@
  *= require_tree .
  */
 
-html, body {
-    height: 100%;
-    width: 100%;
-    min-height: 100%;
-    margin: 0;
+@mixin round($rad) {
+    -moz-border-radius: $rad;
+    -webkit-border-radius: $rad;
+    border-radius: $rad;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
     background-color: #fafafa;
+    font-size: 62.5%;
+    font-family: 'Raleway', sans-serif;
+}
+
+header {
+    height: 5em;
+    width: 96em;
+    margin: auto;
+    margin-top: 1em;
+    background-color: #fff;
+    border: 1px solid #a4a4a4;
+    text-align: center;
+    @include round(5px);
+}
+
+header h1 {
+    color: #222;
+    font-size: 3.6em;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    line-height: 1.4em;
+    margin: 0;
 }
 
 .tLine {
@@ -70,36 +97,10 @@ html, body {
     left: 0px;
 }
 
-.fontFamily {
-    font-family: ubuntu, Verdana, Trebuchet MS;
-}
-
 .bgY {
     background: url('vLine.png');
     background-repeat: repeat-y;
     z-index: 3;
-}
-
-.darkHeader {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    margin-left: -480px;
-    width: 960px;
-    height: 39px;
-    background-color: #fff;
-    border: 1px solid #a4a4a4;
-    color: #fff;
-    text-align: center;
-    vertical-align: middle;
-    overflow: hidden;
-    z-index: 3;
-}
-
-.round {
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 }
 
 .roundRight {
@@ -288,11 +289,6 @@ p {
     font-size: 14px;
     font-weight: normal;
     color: #888;
-}
-
-.title {
-    margin-top: 10px;
-    color: #222;
 }
 
 li {
