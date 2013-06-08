@@ -40,6 +40,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'angularjs-rails'
 
 
 # To use ActiveModel has_secure_password
