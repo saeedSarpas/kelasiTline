@@ -1,0 +1,15 @@
+- content_for :title do
+  ng
+
+- content_for :head do
+  = javascript_include_tag 'ng'
+  = stylesheet_link_tag 'ng'
+
+.row
+  .large-4.columns
+    .panel.radius(ng-controller="userController")
+      %p(ng-repeat="user in users")
+        {{user.name}}
+  .large-8.columns(ng-controller="postsController")
+    .panel.radius(ng-repeat="post in posts")
+      %p {{post}}

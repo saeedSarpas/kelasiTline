@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
 
+  def ng
+  end
+
   def timeline
   end
 

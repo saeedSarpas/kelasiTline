@@ -6,11 +6,9 @@ class PostsController < ApplicationController
   	@posts = Post.recent_posts.includes(:user, replies: :user)
     @user = session['user']
 
-    ActiveRecord::Base.include_root_in_json = true
-
     respond_to do |format|
       format.html
-      format.json { render json: @allPosts.to_json( except: ["updated_at"]) }
+      format.json { render json: @posts.to_json(include: [:replies]) }
     end
   end
 
