@@ -1,9 +1,9 @@
 !!! 5
 
-= raw '<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->'
-= raw '<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->'
-= raw '<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->'
-= raw '<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->'
+= raw '<!--[if lt IE 7 ]> <html class="ie6" lang="en" ng-app> <![endif]-->'
+= raw '<!--[if IE 7 ]>    <html class="ie7" lang="en" ng-app> <![endif]-->'
+= raw '<!--[if IE 8 ]>    <html class="ie8" lang="en" ng-app> <![endif]-->'
+= raw '<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" ng-app> <!--<![endif]-->'
 
 %head
   %meta( charset="utf-8" )
@@ -24,11 +24,11 @@
   - if Rails.env.development?
     %pre( style="position:fixed;bottom:0" )= session.to_yaml
 
-  %header
-    = render 'layouts/header'
-
-  %section#body
-    = yield
+  .row
+    .large-9.large-centered.columns
+      %header
+        %h2.panel.radius Timeline of Kelasi project
+      %section#body= yield
 
   = javascript_include_tag "application"
 

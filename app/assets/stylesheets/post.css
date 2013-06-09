@@ -19,30 +19,14 @@ html, body {
 }
 
 .tLine {
-    /* position: absolute; */
-    /* top: 0px; */
-    /* left: 50%; */
-    /* margin: 0 0 0 -280px; */
-    /* padding: 80px 0 0 0; */
     margin-top: -80px;
     width: 560px;
-    /* height: 1em; */
-    /* min-height: 100%; */
-    /* background: transparent; */
-    /* z-index: 1; */
 }
 
 .vLine {
     position: relative;
     left: 94px;
     top: 120px;
-    /* min-width: 2px; */
-    /* width: 2px; */
-    /* max-width: 2px; */
-    /* height: 100%; */
-    /* min-height: 100%; */
-    /* background-color: #aaa; */
-    /* z-index: 2; */
 }
 
 .bigDot {
@@ -52,8 +36,12 @@ html, body {
 
 .formPos {
     position: relative;
-    top: 140px;
+    top: 100px;
     left: 105px;
+}
+
+#messageForm a {
+    margin-left: 10px;
 }
 
 #body input {
@@ -64,10 +52,8 @@ input.textBox {
     border: 1px solid #2e75ce;
     border-right: 0;
     height: 39px;
-    width: 260px;
+    width: 335px;
     direction: ltr;
-    /* padding: 0 10px 0 7px; */
-    /* overflow: hidden; */
 }
 
 .button {
@@ -104,7 +90,7 @@ input.textBox {
 
 .dot {
     position: relative;
-    top: 30px;
+    top: 16px;
     margin-left: 72px;
     width: 10px;
     height: 10px;
@@ -189,7 +175,7 @@ input.repTextBox {
 }
 
 .blankBox {
-    height: 160px;
+    height: 120px;
 }
 
 .bgTrans {
@@ -299,7 +285,7 @@ p {
 
 .copyRight {
     position: absolute;
-    left: 107px;
+    left: 120px;
     font-size: 13px;
     color: #aaa;
 }

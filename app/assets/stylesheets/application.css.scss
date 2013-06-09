@@ -8,48 +8,19 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require foundation_and_overrides
+ *x require foundation_and_overrides
  */
 
-@mixin round($rad) {
-    -moz-border-radius: $rad;
-    -webkit-border-radius: $rad;
-    border-radius: $rad;
-}
+@import 'foundation_and_overrides';
 
-html {
-    font-size: 16px;
-}
-
-body {
-    background-color: #fafafa;
-    font-size: 62.5%;
-    font-family: 'Raleway', sans-serif;
-}
-
-header {
-    height: 5em;
-    width: 96em;
-    margin: auto;
-    margin-top: 2.5em;
-    background-color: #fff;
-    border: 1px solid #a4a4a4;
+header h2.panel {
+    padding: 0;
+    margin-top: 0.66666667em;
     text-align: center;
-    @include round(5px);
-}
-
-header h1 {
-    color: #222;
-    font-size: 3.6em;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
-    line-height: 1.33333333em;
-    margin: 0;
 }
 
 #body {
     margin: auto;
-    margin-top: 4em;
-    font-size: 1.4em;
-    width: 40em;
+    font-size: 14px;
 }
 
