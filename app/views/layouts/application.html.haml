@@ -17,6 +17,9 @@
   = javascript_include_tag "vendor/custom.modernizr"
   = csrf_meta_tags
 
+  - if content_for? :head
+    = yield :head
+
 %body
   - if Rails.env.development?
     %pre( style="position:fixed;bottom:0" )= session.to_yaml
