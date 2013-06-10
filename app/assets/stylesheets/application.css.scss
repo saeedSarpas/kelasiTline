@@ -22,3 +22,17 @@ header .panel h2 {
     font-size: 14px;
 }
 
+.radius {
+    @include radius;
+}
+
+#body .glow {
+    @include block-glowing-effect(hover);
+    &.selected {
+        -webkit-box-shadow: 0 0 5px $primary-color;
+        -moz-box-shadow: 0 0 5px $primary-color;
+        box-shadow: 0 0 5px $primary-color;
+        border-color: $primary-color;
+    }
+}
+
