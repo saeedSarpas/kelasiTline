@@ -11,7 +11,10 @@ class PagesController < ApplicationController
 
   def do_login
   	session['user'] = User.find_by_name params['name']
-  	redirect_to root_path
+    respond_to do |format|
+  	  format.html { redirect_to root_path }
+      format.json { render json: session['user'] }
+    end
   end
 
   def logout

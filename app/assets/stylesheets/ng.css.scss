@@ -1,20 +1,42 @@
 
-#body .section-container > .section > .title {
-    border: none;
-    & > a {
-        padding: 0.375em;
-        margin-bottom: 0.2143em;
-        & > .name  {
-            font-family: "Yanone Kaffeesatz", sans-serif;
-            font-size: 1.643em;
-            color: #2ba6cb;
+#body .section-container {
+    & > .section > .title {
+        border: none;
+        & > a {
+            padding: 0.375em;
+            margin-bottom: 0.2143em;
+            & > .name  {
+                font-family: "Yanone Kaffeesatz", sans-serif;
+                font-size: 1.643em;
+                color: #2ba6cb;
+            }
         }
+    }
+
+    & > img {
+        margin-bottom: 0.714em;
+        width: 4.5714em;
+        height: 4.5714em;
+    }
+
+    & > p {
+        position: relative;
+        top: 3.0714em;
     }
 }
 
-#body .section-container > img {
-  margin-bottom: 0.714em;
-  width: 4.5714em;
-  height: 4.5714em;
+#all-posts {
+    & > .panel > .row > .large-2 > img {
+        width: 3.4286em;
+        height: 3.4286em;
+    }
+
+    & time {
+        font-size: 0.8571em;
+        font-family: monospace;
+        color: rgba(#222, 0.4);
+        display: block;
+        margin-bottom: 1.35em;
+    }
 }
 

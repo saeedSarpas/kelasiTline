@@ -17,6 +17,11 @@
             %a.glow(id="user-{{user.id}}" ng-click="userLogin(user.id)")
               %span.name {{user.name}}
 
-  .large-8.columns
+  #all-posts.large-8.columns
     .panel.radius(ng-repeat="post in posts")
-      %p {{post}}
+      .row
+        .large-2.columns
+          %img.radius(ng-src="{{users[post.user_id].picture}}")
+        .large-10.columns
+          %time {{post.updated_at}}
+          %p {{post.msg}}
