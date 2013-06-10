@@ -44,7 +44,8 @@ header .panel h2 {
         -webkit-box-shadow: 0 0 5px $primary-color;
         -moz-box-shadow: 0 0 5px $primary-color;
         box-shadow: 0 0 5px $primary-color;
-        border-color: $primary-color;
+        // border-color: $primary-color;
+        background-color: darken($secondary-color, .25);
     }
 }
 
