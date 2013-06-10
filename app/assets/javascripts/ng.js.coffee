@@ -1,5 +1,5 @@
 
-@resourcesCtrl = ($scope, $http) ->
+@resourcesCtrl = ['$scope', '$http', ($scope, $http) ->
   $http.get("/users.json").success (data) ->
     $scope.users = data
 
@@ -10,3 +10,4 @@
     elm = $('#user-'+userId)
     elm.parents('section.section').siblings().find('a').removeClass('selected')
     elm.addClass 'selected'
+]
