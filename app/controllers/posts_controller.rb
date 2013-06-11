@@ -19,7 +19,10 @@ class PostsController < ApplicationController
     @message.parent_id = params[:parent_id] if params[:parent_id].present?
     @message.dir       = params[:dir]
     @message.save
-    redirect_to root_path
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { render json: @message }
+    end
   end
 
   def destroy

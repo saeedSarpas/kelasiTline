@@ -38,5 +38,16 @@
         display: block;
         margin-bottom: 1.35em;
     }
+
+    & > .panel > form {
+        & > textarea, & > .button { margin-bottom: 3px; }
+        & > textarea {
+            resize: vertical;
+            -webkit-transition: height 0.2s;
+            -moz-transition: height 0.2s;
+            transition: height 0.2s;
+            overflow-y: hidden;
+        }
+    }
 }
 

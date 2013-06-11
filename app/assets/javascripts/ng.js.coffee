@@ -25,4 +25,18 @@
         elm = $('#user-'+userId)
         elm.parents('section.section').siblings().find('a').removeClass('selected')
         elm.addClass 'selected'
+
+  $scope.$watch 'loggedInUser.id', (val) ->
+    $('#post-panel').removeClass('hide') if val?
+
+  $scope.postSubmit = ->
+    $http.post('/posts.json', {msg: $scope.postMessage})
+      .success (data) ->
+        unless data.user_id != $scope.loggedInUser.id
+          $scope.posts.unshift data
+          $scope.postMessage = ''
+          $('textarea').height 0
 ]
+
+$('textarea').autosize({append: "\n"});
+
