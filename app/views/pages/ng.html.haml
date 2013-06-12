@@ -28,7 +28,7 @@
               %span.name {{user.name}}
 
   #all-posts.large-8.columns
-    #post-panel.panel.radius.hide
+    #post-panel.panel.radius(ng-show="loggedInUser.id")
       %form
         %textarea(ng-model="postMessage" placeholder="Enter some text")
         %a.small.button(ng-click="postSubmit()") Send
@@ -40,3 +40,20 @@
           %time.timeago(datetime="{{post.updated_at}}")
             {{properTime(post.updated_at)}}
           %pre {{post.msg}}
+          %div(ng-repeat="reply in post.replies")
+            %hr
+            .row
+              .large-2.columns
+                %img.radius(ng-src="{{users[reply.user_id].picture}}")
+              .large-10.columns
+                %time.timeago(datetime="{{reply.updated_at}}")
+                  {{properTime(reply.updated_at)}}
+                %pre {{reply.msg}}
+          %form(ng-show="loggedInUser.id")
+            .row.collapse
+              .large-10.columns
+                %textarea(id="reply-{{post.id}}")
+              .large-2.columns
+                %a.button.secondary.prefix(ng-click="replyClick(post.id)")
+                  Reply
+

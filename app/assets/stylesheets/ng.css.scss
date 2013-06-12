@@ -39,10 +39,11 @@
         margin-bottom: 1.35em;
     }
 
-    & > .panel > form {
-        & > textarea, & > .button { margin-bottom: 3px; }
-        & > textarea {
-            resize: vertical;
+    & form {
+        margin-top: 2em;
+        margin-bottom: 0;
+        & textarea, & .button { margin-bottom: 3px; }
+        & textarea {
             -webkit-transition: height 0.2s;
             -moz-transition: height 0.2s;
             transition: height 0.2s;

@@ -12,6 +12,8 @@
   token = $("meta[name='csrf-token']").attr("content")
   $http.defaults.headers.common["X-CSRF-Token"] = token
 
+  $scope.replyMsg = {}
+
   $scope.loggedInUser =
     picture: 'assets/user.png'
     notifications: 0
@@ -23,9 +25,14 @@
       $scope.users[user.id.toString()].notifications = 0
 
   $http.get("/posts.json").success (data) ->
+    for p in data
+      p.replies ?= []
+      p.replies.reverse()
     $scope.posts = data
+    loading off
 
-  loading off
+  $scope.$watch 'posts', ->
+    $timeout -> $('#all-posts').trigger 'initialize'
 
   $scope.userLogin = (userId) ->
     loading on
@@ -39,12 +46,6 @@
         elm.addClass 'selected'
         loading off
 
-  $scope.$watch 'loggedInUser.id', (val) ->
-    $('#post-panel').removeClass('hide') if val?
-
-  $scope.$watch 'posts', ->
-    $timeout -> $('#all-posts').trigger 'initialize'
-
   $scope.postSubmit = ->
     loading on
     $http.post('/posts.json', {msg: $scope.postMessage})
@@ -55,11 +56,24 @@
           $('textarea').height 0
           loading off
 
+  $scope.replyClick = (id) ->
+    loading on
+    rep = $('#reply-'+id)
+    msg = rep.val()
+    rep.val ''
+    $http.post('/posts.json', {msg: msg, parent_id: id})
+      .success (data) ->
+        for p in $scope.posts
+          if p.id == data.parent_id
+            p.replies.push data
+        loading off
+
   $scope.properTime = (time) ->
     time = time.slice time.indexOf('T')+1, time.indexOf('+')
 ]
 
-$('textarea').autosize({append: "\n"});
 $('#all-posts').on 'initialize', ->
   $('#all-posts time.timeago').timeago()
+  $('textarea').autosize {append: "\n"}
+  $('textarea').css 'resize', 'vertical'
 
