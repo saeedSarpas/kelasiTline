@@ -6,6 +6,7 @@
 
 - content_for :script do
   = javascript_include_tag 'jquery.autosize'
+  = javascript_include_tag 'jquery.timeago'
   = javascript_include_tag 'ng'
 
 .row(ng-controller="resourcesCtrl")
@@ -30,5 +31,6 @@
         .large-2.columns
           %img.radius(ng-src="{{users[post.user_id].picture}}")
         .large-10.columns
-          %time {{post.updated_at}}
-          %p {{post.msg}}
+          %time.timeago(datetime="{{post.updated_at}}")
+            {{properTime(post.updated_at)}}
+          %pre {{post.msg}}

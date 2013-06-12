@@ -1,5 +1,5 @@
 
-@resourcesCtrl = ['$scope', '$http', ($scope, $http) ->
+@resourcesCtrl = ['$scope', '$http', '$timeout', ($scope, $http, $timeout) ->
   token = $("meta[name='csrf-token']").attr("content")
   $http.defaults.headers.common["X-CSRF-Token"] = token
 
@@ -15,6 +15,7 @@
 
   $http.get("/posts.json").success (data) ->
     $scope.posts = data
+    $timeout -> $('#all-posts').trigger 'initialize'
 
   $scope.userLogin = (userId) ->
     $http.post('/login.json', {name: $scope.users[userId].name})
@@ -36,7 +37,12 @@
           $scope.posts.unshift data
           $scope.postMessage = ''
           $('textarea').height 0
+
+  $scope.properTime = (time) ->
+    time = time.slice time.indexOf('T')+1, time.indexOf('+')
 ]
 
 $('textarea').autosize({append: "\n"});
+$('#all-posts').on 'initialize', ->
+  $('#all-posts time.timeago').timeago()
 
