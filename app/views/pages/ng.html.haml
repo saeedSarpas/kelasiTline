@@ -10,6 +10,12 @@
   = javascript_include_tag 'ng'
 
 .row(ng-controller="resourcesCtrl")
+  .row
+    .large-5.large-centered.columns
+      .alert-box.success.radius(data-alert style="display:none")
+        loading...
+        %a.close &times;
+
   .large-4.columns
     .panel.radius
       .section-container.vertical-nav
