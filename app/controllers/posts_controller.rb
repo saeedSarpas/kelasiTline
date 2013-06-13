@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
 
-  before_filter :auth
+  before_filter :auth, except: [:index]
 
   def index
   	@posts = Post.recent_posts.includes(:user, replies: :user)
-    @user = session['user']
+    @user = current_user
 
     respond_to do |format|
       format.html
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
   def create
     @message = Post.new
-    @message.user_id   = session['user'].id
+    @message.user_id   = current_user.id
     @message.msg       = params[:msg]
     @message.parent_id = params[:parent_id] if params[:parent_id].present?
     @message.dir       = params[:dir]

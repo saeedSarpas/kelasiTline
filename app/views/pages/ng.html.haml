@@ -23,7 +23,7 @@
       .section-container.vertical-nav
         %img.radius(ng-src="{{loggedInUser.picture}}")
         %p(class="right")
-          notifications: {{loggedInUser.notifications}}
+          notifications: 0
         %section.section(ng-repeat="user in users")
           %p.title
             %a.glow(id="user-{{user.id}}" ng-click="userLogin(user.id)")
