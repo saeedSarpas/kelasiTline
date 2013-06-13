@@ -1,4 +1,7 @@
 
+Array.prototype.reversed = ->
+  @slice().reverse()
+  
 @loading = (show= true) ->
   clearTimeout @timeout
   if show
@@ -27,7 +30,6 @@
   $http.get("/posts.json").success (data) ->
     for p in data
       p.replies ?= []
-      p.replies.reverse()
     $scope.posts = data
     loading off
 
@@ -65,11 +67,22 @@
       .success (data) ->
         for p in $scope.posts
           if p.id == data.parent_id
-            p.replies.push data
+            p.replies.unshift data
+        loading off
+
+  $scope.deletePost = (id) ->
+    loading on
+    $http.delete("/posts/#{id}.json")
+      .success (data) ->
+        id = "#post-#{data.id}"
+        console.log id
+        $(id).slideUp()
         loading off
 
   $scope.properTime = (time) ->
-    time = time.slice time.indexOf('T')+1, time.indexOf('+')
+    if time?
+      time = time.slice time.indexOf('T')+1, time.indexOf('+')
+    else ""
 ]
 
 $('#all-posts').on 'initialize', ->

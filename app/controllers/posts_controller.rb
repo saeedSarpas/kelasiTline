@@ -29,7 +29,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.status = 0
     @post.save
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: @post }
+    end
   end
 
   private
