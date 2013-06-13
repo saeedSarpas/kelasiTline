@@ -42,7 +42,6 @@ end
 gem 'jquery-rails'
 gem 'angularjs-rails'
 gem 'haml-rails'
-gem "font-awesome-rails"
 
 
 # To use ActiveModel has_secure_password

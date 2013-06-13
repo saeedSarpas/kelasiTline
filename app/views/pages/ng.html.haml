@@ -41,7 +41,7 @@
         .large-10.columns
           %time.timeago(datetime="{{post.updated_at}}")
             {{properTime(post.updated_at)}}
-          %a(ng-click="deletePost(post.id)")
+          %a.delete-button(ng-click="deletePost(post.id)")
             %i.icon-remove-sign
           %pre {{post.msg}}
           %div(ng-repeat="reply in post.replies.reversed()" id="post-{{reply.id}}")
@@ -52,7 +52,7 @@
               .large-10.columns
                 %time.timeago(datetime="{{reply.updated_at}}")
                   {{properTime(reply.updated_at)}}
-                %a(ng-click="deletePost(reply.id)")
+                %a.delete-button(ng-click="deletePost(reply.id)")
                   %i.icon-remove-sign
                 %pre {{reply.msg}}
           %form(ng-show="loggedInUser.id")
@@ -60,6 +60,6 @@
               .large-10.columns
                 %textarea(id="reply-{{post.id}}")
               .large-2.columns
-                %a.button.secondary.prefix(ng-click="replyClick(post.id)")
+                %a.button.secondary.small(ng-click="replyClick(post.id)")
                   Reply
 
