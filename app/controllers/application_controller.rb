@@ -1,8 +1,17 @@
 class ApplicationController < ActionController::Base
+  layout 'application'
   protect_from_forgery
 
-  private
+  protected
   	def logged_in?
-  		session['user'].is_a?(User)
+      self.current_user[:id].present?
   	end
+
+  def current_user
+    session['user'] ||= {picture: 'assets/user.png', name: 'Anonymous'}
+  end
+
+  def current_user=(user)
+    session['user'] = user
+  end
 end

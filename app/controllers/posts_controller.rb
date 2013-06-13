@@ -1,34 +1,38 @@
 class PostsController < ApplicationController
 
-  before_filter :auth
+  before_filter :auth, except: [:index]
 
   def index
   	@posts = Post.recent_posts.includes(:user, replies: :user)
-    @user = session['user']
-
-    ActiveRecord::Base.include_root_in_json = true
+    @user = current_user
 
     respond_to do |format|
       format.html
-      format.json { render json: @allPosts.to_json( except: ["updated_at"]) }
+      format.json { render json: @posts.to_json(include: [:replies]) }
     end
   end
 
   def create
     @message = Post.new
-    @message.user_id   = session['user'].id
+    @message.user_id   = current_user.id
     @message.msg       = params[:msg]
     @message.parent_id = params[:parent_id] if params[:parent_id].present?
     @message.dir       = params[:dir]
     @message.save
-    redirect_to root_path
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { render json: @message }
+    end
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.status = 0
     @post.save
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: @post }
+    end
   end
 
   private

@@ -2,8 +2,11 @@ KelasiTline::Application.routes.draw do
   get "pages/timeline"
 
   resources :posts
+  resources :users
+
+  get 'ng', to: 'pages#ng'
   get 'login', to: 'pages#login', as: :login
-  post 'login', to: 'pages#do_login'
+  post 'login(.:format)', to: 'pages#do_login'
   get 'logout', to: 'pages#logout'
 
   root to: "posts#index"

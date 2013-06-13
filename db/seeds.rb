@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.find_or_create_by_name("Saeed") { |u| u.id = 1 }
-User.find_or_create_by_name("Amir") { |u| u.id = 2 }
-User.find_or_create_by_name("Sadegh") { |u| u.id = 3 }
-User.find_or_create_by_name("Hamed") { |u| u.id = 4 }
-User.find_or_create_by_name("Pouria") { |u| u.id = 5 }
+User.find_or_create_by_name("Saeed") { |u| u.id = 1; u.picture = "assets/Saeed.jpg" }
+User.find_or_create_by_name("Amir") { |u| u.id = 2; u.picture = "assets/Amir.jpg" }
+User.find_or_create_by_name("Sadegh") { |u| u.id = 3; u.picture = "assets/Sadegh.jpg" }
+User.find_or_create_by_name("Hamed") { |u| u.id = 4; u.picture = "assets/Hamed.jpg" }
+User.find_or_create_by_name("Pouria") { |u| u.id = 5; u.picture = "assets/Pouria.jpg" }

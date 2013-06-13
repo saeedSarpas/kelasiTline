@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
 
+  def ng
+  end
+
   def timeline
   end
 
@@ -7,12 +10,15 @@ class PagesController < ApplicationController
   end
 
   def do_login
-  	session['user'] = User.find_by_name params['name']
-  	redirect_to root_path
+  	self.current_user = User.find_by_name params['name']
+    respond_to do |format|
+  	  format.html { redirect_to root_path }
+      format.json { render json: current_user }
+    end
   end
 
   def logout
-    session['user'] = nil
+    self.current_user = nil
     redirect_to root_path
   end
 end

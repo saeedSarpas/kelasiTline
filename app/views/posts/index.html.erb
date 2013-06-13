@@ -1,3 +1,7 @@
+<% content_for :head do%>
+  <%= stylesheet_link_tag "post" %>
+<% end %>
+
 <div id="tLine" class="tLine fontFamily">
 
   <div class="vLine">
@@ -14,7 +18,7 @@
     <% end %>
   </div>
 
-  <div class="blankBox"></div>
+  <div class="blankBox bgY"></div>
 
   <div id="messagesBox" class="messagesBox bgY">
 
@@ -38,7 +42,7 @@
         </div>
 
         <% message.replies.reverse.each do |reply| %>
-          <li class="replyBox">
+          <li class="replyBox round">
             <% pic_address = reply.user.name + ".jpg" %>
             <%= image_tag(pic_address, :alt => "Profile Picture", :width => '30px', :height => '30px', :class => 'replyPic round') %>
 						<div class="deleteButton"></div>
@@ -55,7 +59,7 @@
 
         <div class="commentBox op-50">
           <%= form_tag "/posts", id: "replyForm", method: "post" do %>
-            <input type="text" id="msg" name="msg" class="repTextBox" />
+            <input type="text" id="msg" name="msg" class="repTextBox roundLeft" />
             <input type="hidden" id="dir" name="dir" value="0">
             <input type="hidden" id="parent_id" name="parent_id" value="<%= message[:id] %>" >
             <input type="submit" id="repSubmitButton" class="roundRight repButton fontFamily" value="Reply"/><br />
