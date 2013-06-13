@@ -53,6 +53,7 @@ Array.prototype.reversed = ->
     $http.post('/posts.json', {msg: $scope.postMessage})
       .success (data) ->
         unless data.user_id != $scope.loggedInUser.id
+          data.replies ?= []
           $scope.posts.unshift data
           $scope.postMessage = ''
           $('textarea').height 0
