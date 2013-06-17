@@ -56,6 +56,8 @@
 
     & pre {
         font-family: "Raleway", sans-serif;
+        word-wrap: break-word;
+        white-space: pre-wrap;
     }
 
     & > .panel > .row > .large-10 a.delete-button {
