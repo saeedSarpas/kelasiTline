@@ -27,7 +27,7 @@
         %section.section(ng-repeat="user in users")
           %p.title
             %a.glow(id="user-{{user.id}}" ng-click="userLogin(user.id)")
-              %span.name {{user.name}}
+              %span.name(ng-bind="user.name")
 
   #all-posts.large-8.columns
     #post-panel.panel.radius(ng-show="loggedInUser.id")
@@ -39,22 +39,20 @@
         .large-2.columns
           %img.radius(ng-src="{{users[post.user_id].picture}}")
         .large-10.columns
-          %time.timeago(datetime="{{post.updated_at}}")
-            {{properTime(post.updated_at)}}
+          %time.timeago(datetime="{{post.updated_at}}" ng-bind="properTime(post.updated_at)")
           %a.delete-button(ng-click="deletePost(post.id)")
             %i.icon-remove-sign
-          %pre {{post.msg}}
+          %pre(ng-bind="post.msg")
           %div(ng-repeat="reply in post.replies.reversed()" id="post-{{reply.id}}")
             %hr
             .row
               .large-2.columns
                 %img.radius(ng-src="{{users[reply.user_id].picture}}")
               .large-10.columns
-                %time.timeago(datetime="{{reply.updated_at}}")
-                  {{properTime(reply.updated_at)}}
+                %time.timeago(datetime="{{reply.updated_at}}" ng-bind="properTime(reply.updated_at)")
                 %a.delete-button(ng-click="deletePost(reply.id)")
                   %i.icon-remove-sign
-                %pre {{reply.msg}}
+                %pre(ng-bind="reply.msg")
           %form(ng-show="loggedInUser.id")
             .row.collapse
               .large-10.columns
