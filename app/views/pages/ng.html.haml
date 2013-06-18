@@ -20,9 +20,6 @@
   .large-4.columns
     .panel.radius
       .section-container.vertical-nav
-        %img.radius(ng-src="{{loggedInUser.picture}}")
-        %p(class="right")
-          notifications: 0
         %section.section(ng-repeat="user in users")
           %p.title
             %a.glow(id="user-{{user.id}}" ng-click="userLogin(user.id)")
@@ -31,6 +28,7 @@
   #all-posts.large-8.columns
     #post-panel.panel.radius(ng-show="loggedInUser.id")
       %form
+        %img.radius(ng-src="{{loggedInUser.picture}}")
         %textarea(ng-model="postMessage" placeholder="Enter some text")
         %a.small.button(ng-click="postSubmit()") Send
     .panel.radius(ng-repeat="post in posts" id="post-{{post.id}}"
@@ -57,6 +55,13 @@
                 %a.delete-button(ng-click="deletePost(reply.id)")
                   %i.icon-remove-sign
                 %pre(ng-bind="reply.msg")
+      .row.reply-placeholder(ng-show="loggedInUser.id")
+        .large-10.large-offset-2.columns
+          %p(ng-click="showReply(post.id)") reply
+      .row.reply-box.hide
+        .large-2.columns
+          %img.radius(ng-src="{{loggedInUser.picture}}")
+        .large-10.columns
           %form(ng-show="loggedInUser.id")
             .row.collapse
               .large-10.columns

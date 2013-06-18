@@ -86,6 +86,10 @@ Array.prototype.reversed = ->
     else
       item.hide()
 
+  $scope.showReply = (id) ->
+    $("#post-#{id} .reply-placeholder").hide()
+    $("#post-#{id} .reply-box").show()
+
   $scope.properTime = (time) ->
     if time?
       time = time.slice time.indexOf('T')+1, time.indexOf('+')

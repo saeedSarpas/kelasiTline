@@ -51,8 +51,9 @@
     }
 
     & form {
-        margin-top: 2em;
+        margin-top: 0;
         margin-bottom: 0;
+        & > img { margin-bottom: 1em; }
         & textarea, & .button { margin-bottom: 3px; }
         & textarea {
             -webkit-transition: height 0.2s;
@@ -78,6 +79,22 @@
         &:hover {
             &:after {content: "delete";}
             color: rgba(#666, 1);
+        }
+    }
+
+    & .reply-placeholder p {
+        margin-top: 2em;
+        margin-bottom: 0;
+        opacity: 0.35;
+        cursor: text;
+    }
+
+    & .panel > .row.reply-box {
+        margin-top: 2em;
+        & > .large-2 > img {
+            float: right;
+            width: 2.7142em;
+            height: auto;
         }
     }
 }
