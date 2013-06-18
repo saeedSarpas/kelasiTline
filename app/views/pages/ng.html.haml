@@ -10,13 +10,12 @@
   = javascript_include_tag 'ng'
 
 .row(ng-controller="resourcesCtrl")
-  .row
-    .large-5.large-centered.columns
-      .alert-box.success.radius(data-alert style="display:none")
-        %i.icon-info-sign
-        loading...
-        %a.close
-          %i.icon-remove-circle
+  .row(style="position:relative")
+    .alert-box.alert(data-alert style="display:none")
+      %a(href="javascript:location.reload()")
+        reload
+      %i.icon-info-sign
+      Something went wrong!
 
   .large-4.columns
     .panel.radius

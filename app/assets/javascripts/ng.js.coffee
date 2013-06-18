@@ -5,7 +5,7 @@ Array.prototype.reversed = ->
 @loading = (show= true) ->
   clearTimeout @timeout
   if show
-    @timeout = setTimeout("$('.alert-box').slideDown()", 50)
+    @timeout = setTimeout("$('.alert-box').slideDown()", 750)
   else
     $('.alert-box').slideUp()
 
