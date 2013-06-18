@@ -25,7 +25,7 @@
             %a.glow(id="user-{{user.id}}" ng-click="userLogin(user.id)")
               %span.name(ng-bind="user.name")
 
-  #all-posts.large-8.columns
+  #all-posts.large-8.columns(ng-cloak)
     #post-panel.panel.radius(ng-show="loggedInUser.id")
       %form
         %img.radius(ng-src="{{loggedInUser.picture}}")
