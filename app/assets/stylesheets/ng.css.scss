@@ -69,6 +69,7 @@
     }
 
     & > .panel > .row > .large-10 a.delete-button {
+        display: none;
         position: absolute;
         top: 0;
         right: 1em;

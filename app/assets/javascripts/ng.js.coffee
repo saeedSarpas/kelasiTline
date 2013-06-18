@@ -76,9 +76,15 @@ Array.prototype.reversed = ->
     $http.delete("/posts/#{id}.json")
       .success (data) ->
         id = "#post-#{data.id}"
-        console.log id
         $(id).slideUp()
         loading off
+
+  $scope.showDelete = (id, show) ->
+    item = $("#post-#{id} > .row > .columns > .delete-button")
+    if show
+      item.show()
+    else
+      item.hide()
 
   $scope.properTime = (time) ->
     if time?
