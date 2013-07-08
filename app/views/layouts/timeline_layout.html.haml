@@ -2,8 +2,11 @@
 %htnl
   %head
     %meta( charset="utf-8" )
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
 
     %title= "kelasiTline#{content_for?(:title) ? titleize(yield :title) : ''}"
+
+    = stylesheet_link_tag "bootstrap_and_override", :media => "all"
 
     = csrf_meta_tags
 
@@ -11,10 +14,22 @@
       = yield :head
 
   %body
+    %header.navbar.navbar-fixed-top
+      %nav.navbar-inner
+        .container
+          = render 'layouts/navigation'
+
     - if Rails.env.development?
       %pre( style="position:fixed;bottom:0" )= session.to_yaml
 
-    = yield
+    #main{:role => "main"}
+      .container
+        .content
+          .row
+            .span12
+              = render 'layouts/messages'
+              = yield
+          %footer
 
     = javascript_include_tag "application"
     - if content_for? :script
