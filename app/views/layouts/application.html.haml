@@ -24,10 +24,10 @@
     %pre( style="position:fixed;bottom:0" )= session.to_yaml
 
   .row
-    .large-9.large-centered.columns
+    .large-12.large-centered.columns
       %header
-        .panel.radius
-          %h2 Timeline of Kelasi project
+        .panel
+          %h1 Timeline of Kelasi project
       %section#body= yield
 
   = javascript_include_tag "application"
