@@ -1,0 +1,21 @@
+!!! 5
+%htnl
+  %head
+    %meta( charset="utf-8" )
+
+    %title= "kelasiTline#{content_for?(:title) ? titleize(yield :title) : ''}"
+
+    = csrf_meta_tags
+
+    - if content_for? :head
+      = yield :head
+
+  %body
+    - if Rails.env.development?
+      %pre( style="position:fixed;bottom:0" )= session.to_yaml
+
+    = yield
+
+    = javascript_include_tag "application"
+    - if content_for? :script
+      = yield :script
