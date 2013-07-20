@@ -47,4 +47,11 @@ describe PagesController do
       response.should redirect_to root_path
     end
   end
+
+  context 'timeline' do
+    it 'should use timeline specific layout' do
+      get 'timeline'
+      response.should render_template('layouts/timeline_layout')
+    end
+  end 
 end

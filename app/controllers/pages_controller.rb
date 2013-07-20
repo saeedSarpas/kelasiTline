@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def timeline
+    render layout: 'timeline_layout'
   end
 
   def login
