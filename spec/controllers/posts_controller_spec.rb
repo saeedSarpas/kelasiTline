@@ -43,9 +43,5 @@ describe PostsController do
 
   context 'logged out' do
 
-    it "Should redirect to login" do
-      get 'index'
-			response.should redirect_to login_path
-		end
 	end
 end
