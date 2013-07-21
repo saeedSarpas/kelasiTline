@@ -7,7 +7,7 @@ describe ApplicationController do
 	end
 
 	it "should say if we logged in" do
-		session['user'] = User.new
+		subject.current_user = User.first
 		subject.should be_logged_in
 	end
 end
