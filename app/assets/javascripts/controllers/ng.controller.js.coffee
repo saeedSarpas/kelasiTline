@@ -1,7 +1,7 @@
 
 
 ngapp.controller "resourcesCtrl",
-    ['$scope', '$http', '$timeout', 'notification', ($scope, $http, $timeout, notification) ->
+    ['$scope', '$http', '$timeout', 'notification', 'utilities', ($scope, $http, $timeout, notification, utilities) ->
       notification.loading on
 
       token = $("meta[name='csrf-token']").attr("content")
@@ -23,10 +23,8 @@ ngapp.controller "resourcesCtrl",
         for p in data
           p.replies ?= []
         $scope.posts = data
+        utilities.initialization()
         notification.loading off
-
-      $scope.$watch 'posts', ->
-        $timeout -> $('#all-posts').trigger 'initialize'
 
       $scope.userLogin = (userId) ->
         notification.loading on
@@ -49,6 +47,7 @@ ngapp.controller "resourcesCtrl",
               $scope.posts.unshift data
               $scope.postMessage = ''
               $('textarea').height 0
+              utilities.initialization()
               notification.loading off
 
       $scope.replyClick = (id) ->
@@ -61,6 +60,7 @@ ngapp.controller "resourcesCtrl",
             for p in $scope.posts
               if p.id == data.parent_id
                 p.replies.unshift data
+            utilities.initialization()
             notification.loading off
 
       $scope.deletePost = (id) ->

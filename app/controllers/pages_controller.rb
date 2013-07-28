@@ -1,8 +1,5 @@
 class PagesController < ApplicationController
 
-  def ng
-  end
-
   def timeline
     render layout: 'timeline_layout'
   end
