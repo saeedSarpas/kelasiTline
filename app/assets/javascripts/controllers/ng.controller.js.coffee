@@ -6,6 +6,7 @@ ngapp.controller "resourcesCtrl",
 
       token = $("meta[name='csrf-token']").attr("content")
       $http.defaults.headers.common["X-CSRF-Token"] = token
+      $http.defaults.headers.common["X-From-Angular"] = 'True'
 
       $scope.replyMsg = {}
 

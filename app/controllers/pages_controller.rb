@@ -1,5 +1,16 @@
 class PagesController < ApplicationController
 
+  def ng
+  end
+
+  def ng_home
+    if request.key? 'HTTP_X_FROM_ANGULAR'
+      render layout: nil
+    else
+      redirect_to root_path
+    end
+  end
+
   def timeline
     render layout: 'timeline_layout'
   end
