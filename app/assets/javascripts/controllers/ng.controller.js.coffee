@@ -1,43 +1,17 @@
 
 
 ngapp.controller "resourcesCtrl",
-    ['$scope', '$http', '$timeout', 'notification', 'utilities', ($scope, $http, $timeout, notification, utilities) ->
+    ['$scope', '$http', '$q', '$timeout', 'notification', 'utilities', ($scope, $http, $q, $timeout, notification, utilities) ->
       notification.loading on
-
-      token = $("meta[name='csrf-token']").attr("content")
-      $http.defaults.headers.common["X-CSRF-Token"] = token
-      $http.defaults.headers.common["X-From-Angular"] = 'True'
 
       $scope.replyMsg = {}
 
-      $scope.loggedInUser =
-        picture: 'assets/user.png'
-        notifications: 0
-
-      $http.get("/users.json").success (data) ->
-        $scope.users = {}
-        for user in data
-          $scope.users[user.id.toString()] = user
-          $scope.users[user.id.toString()].notifications = 0
-
-      $http.get("/posts.json").success (data) ->
-        for p in data
-          p.replies ?= []
-        $scope.posts = data
+      $q.all(
+        $scope.users = utilities.loadUsers(),
+        $scope.posts = utilities.loadPosts()
+      ).then ->
         utilities.initialization()
         notification.loading off
-
-      $scope.userLogin = (userId) ->
-        notification.loading on
-        $http.post('/login.json', {name: $scope.users[userId].name})
-          .success (data) ->
-            return unless data.id == userId
-
-            $scope.loggedInUser = data
-            elm = $('#user-'+userId)
-            elm.parents('section.section').siblings().find('a').removeClass('selected')
-            elm.addClass 'selected'
-            notification.loading off
 
       $scope.postSubmit = ->
         notification.loading on
@@ -88,3 +62,24 @@ ngapp.controller "resourcesCtrl",
           time = time.slice time.indexOf('T')+1, time.indexOf('+')
         else ""
     ]
+
+ngapp.controller "commandCntl",
+  [ '$scope', '$rootScope', ($scope, $rootScope) ->
+    $scope.placeholder = "Try typing 'Login <Your Name>'"
+    $scope.runCommand = ->
+      console.log $scope.command
+
+    $rootScope.loggedInUser = id: 2
+      # $scope.userLogin = (userId) ->
+      #   notification.loading on
+      #   $http.post('/login.json', {name: $scope.users[userId].name})
+      #     .success (data) ->
+      #       return unless data.id == userId
+
+      #       $scope.loggedInUser = data
+      #       elm = $('#user-'+userId)
+      #       elm.parents('section.section').siblings().find('a').removeClass('selected')
+      #       elm.addClass 'selected'
+      #       notification.loading off
+
+  ]
