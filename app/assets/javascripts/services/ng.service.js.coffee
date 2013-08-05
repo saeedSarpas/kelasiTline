@@ -7,7 +7,6 @@ class Notification
   constructor: (@timeout) ->
 
   loading: (promise) ->
-    console.log 'start'
     @timeout.cancel @timeoutId if @timeoutId?
 
     @timeoutId = @timeout( ->
@@ -28,11 +27,10 @@ ngapp_service.factory("utilities",
   [ '$timeout', '$http', '$q', ($timeout, $http, $q) ->
     return {
       initialization: ->
-        $timeout( ->
+        $timeout -> $timeout ->
           $('#all-posts time.timeago').timeago()
           $('textarea').autosize {append: "\n"}
           $('textarea').css 'resize', 'vertical'
-        , 0)
     }
   ]
 )
