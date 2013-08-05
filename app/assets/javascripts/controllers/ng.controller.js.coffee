@@ -28,9 +28,10 @@ ngapp.controller "resourcesCtrl",
         rep.val ''
         loading $http.post('/posts.json', {msg: msg, parent_id: id})
           .success (data) ->
-            for p in $scope.posts
-              if p.id == data.parent_id
-                p.replies.unshift data
+            $q.when($scope.posts).then (posts) ->
+              for p in posts
+                if p.id == data.parent_id
+                  p.replies.unshift data
             utilities.initialization()
 
       $scope.deletePost = (id) ->
