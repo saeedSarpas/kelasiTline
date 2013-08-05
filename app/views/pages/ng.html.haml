@@ -5,12 +5,6 @@
   = stylesheet_link_tag 'ng'
 
 - content_for :script do
-  = javascript_include_tag 'jquery.autosize'
-  = javascript_include_tag 'jquery.timeago'
   = javascript_include_tag 'ng'
-  = javascript_include_tag 'services/ng.service'
-  = javascript_include_tag 'filters/ng.filter'
-  = javascript_include_tag 'directives/ng.directive'
-  = javascript_include_tag 'controllers/ng.controller'
 
 %div(ng-view)

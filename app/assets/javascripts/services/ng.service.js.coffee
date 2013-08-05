@@ -6,17 +6,14 @@ ngapp_service = angular.module("ngapp.service", [])
 class Notification
   constructor: (@timeout) ->
 
-  timeoutId: null
   loading: (show = true) ->
-    @timeout.cancel @timeoutId
     if show
-      id = @timeout ->
-        console.log 'hi'
-      @timeoutId = id
-      $('.alert-box').slideDown()
-      # , 0)
+      id = @timeout( ->
+        $('.alert-box').slideDown()
+      , 750)
     else
-      $('.alert-box').slideUp()
+      @timeout ->
+        $('.alert-box').slideUp()
 
 
 ngapp_service.factory("notification",
@@ -34,21 +31,6 @@ ngapp_service.factory("utilities",
           $('textarea').autosize {append: "\n"}
           $('textarea').css 'resize', 'vertical'
         , 0)
-      loadUsers: ->
-        r = $q.defer()
-        $http.get("/users.json").success (data) ->
-          result = {}
-          for user in data
-            result[user.id.toString()] = user
-          r.resolve result
-        return r.promise
-      loadPosts: ->
-        r = $q.defer()
-        $http.get("/posts.json").success (data) ->
-          for p in data
-            p.replies ?= []
-          r.resolve data
-        return r.promise
     }
   ]
 )

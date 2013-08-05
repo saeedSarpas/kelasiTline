@@ -1,14 +1,14 @@
 
-
 ngapp.controller "resourcesCtrl",
-    ['$scope', '$http', '$q', '$timeout', 'notification', 'utilities', ($scope, $http, $q, $timeout, notification, utilities) ->
+    ['$scope', '$http', '$q', '$timeout', 'notification', 'utilities', 'users', 'posts',
+    ($scope, $http, $q, $timeout, notification, utilities, users, posts) ->
       notification.loading on
 
       $scope.replyMsg = {}
 
       $q.all(
-        $scope.users = utilities.loadUsers(),
-        $scope.posts = utilities.loadPosts()
+        $scope.users = users.load(),
+        $scope.posts = posts.load()
       ).then ->
         utilities.initialization()
         notification.loading off
@@ -19,7 +19,7 @@ ngapp.controller "resourcesCtrl",
           .success (data) ->
             unless data.user_id != $scope.loggedInUser.id
               data.replies ?= []
-              $scope.posts.unshift data
+              $q.when($scope.posts).then (p) -> p.unshift data
               $scope.postMessage = ''
               $('textarea').height 0
               utilities.initialization()
@@ -64,22 +64,23 @@ ngapp.controller "resourcesCtrl",
     ]
 
 ngapp.controller "commandCntl",
-  [ '$scope', '$rootScope', ($scope, $rootScope) ->
+  [ '$scope', '$rootScope', '$http', '$q', 'users', ($scope, $rootScope, $http, $q, users) ->
     $scope.placeholder = "Try typing 'Login <Your Name>'"
     $scope.runCommand = ->
-      console.log $scope.command
+      cmd = $scope.command.split ' '
+      if cmd[0] == 'login'
+        $q.when(users.data).then (users) ->
+          user = (users[u] for u of users when users[u].name == cmd[1])
+          if user.length == 1
+            user = user[0]
+          else
+            console.log 'Error', user, users, cmd
+            return
+          $http.post('/login.json', user)
+            .success (data) ->
+              return unless data.id == user.id
 
-    $rootScope.loggedInUser = id: 2
-      # $scope.userLogin = (userId) ->
-      #   notification.loading on
-      #   $http.post('/login.json', {name: $scope.users[userId].name})
-      #     .success (data) ->
-      #       return unless data.id == userId
-
-      #       $scope.loggedInUser = data
-      #       elm = $('#user-'+userId)
-      #       elm.parents('section.section').siblings().find('a').removeClass('selected')
-      #       elm.addClass 'selected'
-      #       notification.loading off
-
+              $rootScope.loggedInUser = user
+      if cmd[0] == 'logout'
+        $http.get('/logout').success -> $rootScope.loggedInUser = null
   ]
