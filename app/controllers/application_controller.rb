@@ -13,4 +13,6 @@ class ApplicationController < ActionController::Base
   def current_user=(user)
     session['user'] = user
   end
+
+  helper_method :logged_in?
 end

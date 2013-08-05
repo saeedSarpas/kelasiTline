@@ -18,9 +18,45 @@ html, body {
     background-color: #fafafa;
 }
 
+#body #tLine{
+    margin: auto;
+}
+
+.panel {
+    background-color: transparent;
+    border: 0;
+    padding: 2em 0 2em 0;
+}
+
+#body > hr {
+    margin-top: -2em;
+}
+
+.panel h1 {
+    color: #aaa;
+}
+
+.menubar-hidden-field {
+    display: inline;
+}
+
 .tLine {
     margin-top: -80px;
     width: 560px;
+}
+
+.user-name {
+    display: inline;
+    border: 0px;
+    border-bottom: 2px solid #0f0;
+    padding: 0 0em.3em 0em;
+    margin-left: .7em;
+    position: relative;
+    top: -2.40em;
+}
+
+.menubar-logout {
+    border-bottom: 0;
 }
 
 .vLine {
@@ -32,6 +68,7 @@ html, body {
 .bigDot {
     position: relative;
     left: -7px;
+    top: -2.5em;
 }
 
 .formPos {

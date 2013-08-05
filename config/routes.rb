@@ -5,6 +5,7 @@ KelasiTline::Application.routes.draw do
   resources :users
 
   get 'ng', to: 'pages#ng'
+  get 'home', to: 'pages#ng_home'
   get 'login', to: 'pages#login', as: :login
   post 'login(.:format)', to: 'pages#do_login'
   get 'logout', to: 'pages#logout'
