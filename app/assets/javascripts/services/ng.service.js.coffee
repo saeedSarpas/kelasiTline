@@ -6,14 +6,16 @@ ngapp_service = angular.module("ngapp.service", [])
 class Notification
   constructor: (@timeout) ->
 
-  loading: (show = true) ->
-    if show
-      id = @timeout( ->
-        $('.alert-box').slideDown()
-      , 750)
-    else
-      @timeout ->
-        $('.alert-box').slideUp()
+  loading: (promise) ->
+    console.log 'start'
+    @timeout.cancel @timeoutId if @timeoutId?
+
+    @timeoutId = @timeout( ->
+      $('.alert-box').slideDown()
+    , 0)
+
+    promise.then ->
+      $('.alert-box').slideUp()
 
 
 ngapp_service.factory("notification",
