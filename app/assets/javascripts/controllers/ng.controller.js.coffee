@@ -73,6 +73,7 @@ ngapp.controller "commandCntl",
           $http.post('/login.json', user)
             .success (data) ->
               $scope.command = ''
+              $scope.placeholder = "Now You can type 'logout'"
               return unless data.id == user.id
 
               $rootScope.loggedInUser = user
@@ -80,4 +81,5 @@ ngapp.controller "commandCntl",
         loading $http.get('/logout').success ->
           $rootScope.loggedInUser = null
           $scope.command = ''
+          $scope.placeholder = "Try typing 'login <Your Name>'"
   ]
