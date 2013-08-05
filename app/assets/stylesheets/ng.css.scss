@@ -1,31 +1,5 @@
 //= require _font-awesome
 
-#body .section-container {
-    & > .section > .title {
-        border: none;
-        & > a {
-            padding: 0.375em;
-            margin-bottom: 0.2143em;
-            & > .name  {
-                font-family: "Yanone Kaffeesatz", sans-serif;
-                font-size: 1.643em;
-                color: #2ba6cb;
-            }
-        }
-    }
-
-    & > img {
-        margin-bottom: 0.714em;
-        width: 4.5714em;
-        height: 4.5714em;
-    }
-
-    & > p {
-        position: relative;
-        top: 3.0714em;
-    }
-}
-
 #body .alert-box {
     position: absolute;
     top: -1.35em;
@@ -38,8 +12,8 @@
 
 #all-posts {
     & > .panel > .row > .large-2 > img {
-        width: 3.4286em;
-        height: 3.4286em;
+        width: 4.2857em;
+        height: auto;
     }
 
     & time {
@@ -53,7 +27,6 @@
     & form {
         margin-top: 0;
         margin-bottom: 0;
-        & > img { margin-bottom: 1em; }
         & textarea, & .button { margin-bottom: 3px; }
         & textarea {
             -webkit-transition: height 0.2s;
@@ -69,16 +42,24 @@
         white-space: pre-wrap;
     }
 
-    & > .panel > .row > .large-10 a.delete-button {
-        display: none;
-        position: absolute;
-        top: 0;
-        right: 1em;
-        font-size: 0.7143em;
-        color: rgba(#666, 0.3);
-        &:hover {
-            &:after {content: "delete";}
-            color: rgba(#666, 1);
+    & > .panel > .row > .large-10 {
+
+        & .row > .large-2 > img {
+            width: 3.4286em;
+            height: auto;
+        }
+
+        & a.delete-button {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 1em;
+            font-size: 0.7143em;
+            color: rgba(#666, 0.3);
+            &:hover {
+                &:after {content: "delete";}
+                color: rgba(#666, 1);
+            }
         }
     }
 
