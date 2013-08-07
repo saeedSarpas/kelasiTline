@@ -4,13 +4,18 @@ ngapp.controller "resourcesCtrl",
     ($scope, $http, $q, $timeout, notification, utilities, users, posts) ->
       loading = (p) -> notification.loading p
 
+      init = ->
+        utilities.initialization()
+        $timeout init, 1500
+
+      init()
+
       $scope.replyMsg = {}
 
       loading $q.all(
         $scope.users = users.load(),
         $scope.posts = posts.load()
-      ).then ->
-        utilities.initialization()
+      ).then -> init()
 
       $scope.postSubmit = ->
         loading $http.post('/posts.json', {msg: $scope.postMessage})
@@ -20,7 +25,6 @@ ngapp.controller "resourcesCtrl",
               $q.when($scope.posts).then (p) -> p.unshift data
               $scope.postMessage = ''
               $('textarea').height 0
-              utilities.initialization()
 
       $scope.replyClick = (id) ->
         rep = $('#reply-'+id)
@@ -32,7 +36,6 @@ ngapp.controller "resourcesCtrl",
               for p in posts
                 if p.id == data.parent_id
                   p.replies.unshift data
-            utilities.initialization()
 
       $scope.deletePost = (id) ->
         loading $http.delete("/posts/#{id}.json")
