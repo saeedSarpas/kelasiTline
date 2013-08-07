@@ -16,6 +16,9 @@ ngapp.controller "resourcesCtrl",
       loading($scope.posts = posts.load())
 
       $scope.postSubmit = ->
+        msg = $scope.postMessage.trim()
+        return if msg == ''
+
         loading $http.post('/posts.json', {msg: $scope.postMessage})
           .success (data) ->
             unless data.user_id != $scope.loggedInUser.id
@@ -23,6 +26,10 @@ ngapp.controller "resourcesCtrl",
               $q.when($scope.posts).then (p) -> p.unshift data
               $scope.postMessage = ''
               $('textarea').height 0
+              $timeout ->
+                $('#post-panel a.button').removeClass('disabled')
+
+        $('#post-panel a.button').addClass('disabled')
 
       $scope.replyClick = (id) ->
         rep = $('#reply-'+id)
