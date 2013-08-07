@@ -12,10 +12,8 @@ ngapp.controller "resourcesCtrl",
 
       $scope.replyMsg = {}
 
-      loading $q.all(
-        $scope.users = users.load(),
-        $scope.posts = posts.load()
-      ).then -> init()
+      loading($scope.users = users.load())
+      loading($scope.posts = posts.load())
 
       $scope.postSubmit = ->
         loading $http.post('/posts.json', {msg: $scope.postMessage})

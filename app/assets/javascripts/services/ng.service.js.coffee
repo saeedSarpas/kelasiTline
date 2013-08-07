@@ -11,7 +11,7 @@ class Notification
 
     @timeoutId = @timeout( ->
       $('.alert-box').slideDown()
-    , 0)
+    , 750)
 
     promise.then ->
       $('.alert-box').slideUp()
