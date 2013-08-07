@@ -66,9 +66,18 @@ ngapp.controller "resourcesCtrl",
     ]
 
 ngapp.controller "commandCntl",
-  [ '$scope', '$rootScope', '$http', '$q', 'users', 'notification', ($scope, $rootScope, $http, $q, users, notification) ->
+  [ '$scope', '$rootScope', '$http', '$q', '$cookieStore', 'users', 'notification', ($scope, $rootScope, $http, $q, $cookieStore, users, notification) ->
     loading = (p) -> notification.loading p
     $scope.placeholder = "Try typing 'login <Your Name>'"
+    loggedInUser = $cookieStore.get 'loggedInUser'
+    if loggedInUser?
+      $http.post('/login.json', loggedInUser)
+        .success (data) ->
+          return unless data.id == loggedInUser.id
+
+          $scope.placeholder = "Now You can type 'logout'"
+          $rootScope.loggedInUser = loggedInUser
+
     $scope.runCommand = ->
       cmd = $scope.command.split ' '
       if cmd[0] == 'login'
@@ -81,14 +90,16 @@ ngapp.controller "commandCntl",
             return
           $http.post('/login.json', user)
             .success (data) ->
-              $scope.command = ''
-              $scope.placeholder = "Now You can type 'logout'"
               return unless data.id == user.id
 
+              $scope.command = ''
+              $scope.placeholder = "Now You can type 'logout'"
               $rootScope.loggedInUser = user
+              $cookieStore.put 'loggedInUser', user
       if cmd[0] == 'logout'
         loading $http.get('/logout').success ->
           $rootScope.loggedInUser = null
+          $cookieStore.put 'loggedInUser', null
           $scope.command = ''
           $scope.placeholder = "Try typing 'login <Your Name>'"
   ]
