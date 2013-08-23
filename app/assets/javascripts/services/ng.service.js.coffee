@@ -3,6 +3,30 @@
 ngapp_service = angular.module("ngapp.service", [])
 
 
+class Command
+  constructor: (@http, @q, @posts) ->
+
+  run: (commandd, parameter) ->
+    switch commandd 
+      when "post"
+        msg = parameter
+        return if msg == ''
+
+        @http.post('/posts.json', {msg: parameter})
+          .success (data) =>
+            data.replies ?= []
+            @posts.data.unshift data
+      else
+        console.log("command not found")
+    
+
+ngapp_service.factory("command", 
+  ['$http', '$q', 'posts', ($http, $q, posts) ->
+    new Command $http, $q, posts
+  ]
+)
+
+
 class Notification
   constructor: (@timeout, @q) ->
 
