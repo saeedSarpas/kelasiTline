@@ -67,18 +67,20 @@ ngapp.controller "resourcesCtrl",
     ]
 
 ngapp.controller "commandCntl",
-  [ '$scope', '$rootScope', '$http', '$q', '$cookieStore', 'users', 'posts', 'notification', 'command'
-  ($scope, $rootScope, $http, $q, $cookieStore, users, posts, notification, command) ->
+  [ '$scope', '$rootScope', '$cookieStore', 'notification', 'command'
+  ($scope, $rootScope, $cookieStore, notification, command) ->
     loading = (p) -> notification.loading p
+
     $scope.placeholder = "Try typing 'login <Your Name>'"
+    $rootScope.$watch 'loggedInUser', (nval) ->
+      $scope.placeholder = if nval?
+        "Now You can type 'logout'"
+      else
+        "Try typing 'login <Your Name>'"
+
     loggedInUser = $cookieStore.get 'loggedInUser'
     if loggedInUser?
-      $http.post('/login.json', loggedInUser)
-        .success (data) ->
-          return unless data.id == loggedInUser.id
-
-          $scope.placeholder = "Now You can type 'logout'"
-          $rootScope.loggedInUser = loggedInUser
+      command.run('login', loggedInUser.name)
 
     $scope.runCommand = ->
       cmd_i = $scope.command.indexOf(' ')
