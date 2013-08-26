@@ -39,6 +39,7 @@
               .large-1.columns
                 %img.radius(ng-src="{{users[reply.user_id].picture}}")
               .large-11.columns
+                %span.post-id {{reply.id}}
                 %time.timeago(datetime="{{reply.updated_at}}" ng-bind="properTime(reply.updated_at)")
                 %a.delete-button(ng-click="deletePost(reply.id)")
                   %i.icon-remove-sign

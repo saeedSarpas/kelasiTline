@@ -57,8 +57,24 @@ class Command
               return unless data.id == user.id
 
               @rootScope.loggedInUser = user
-              @cookieStore.put 'loggedInUser', user      
-   
+              @cookieStore.put 'loggedInUser', user
+
+      when 'delete'
+        user = @rootScope.loggedInUser
+        unless user?
+          result.reject 'You should loggin first'
+          return result.promise
+        post = (p for p in @posts.data when p.id.toString() == parameter)
+        unless post.length == 1
+          result.reject 'There is no post with this id'
+          return result.promise
+        if post[0].user_id != user.id
+          result.reject 'You do not have permission to delete this post'
+          return result.promise
+        @http.delete("/posts/#{parameter}.json")
+          .success (data) ->
+            id = "#post-#{data.id}"
+            $(id).slideUp()   
       else
         result.reject 'Command not found'
         return result.promise
