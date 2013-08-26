@@ -4,25 +4,68 @@ ngapp_service = angular.module("ngapp.service", [])
 
 
 class Command
-  constructor: (@http, @q, @posts) ->
+  constructor: (@http, @q, @rootScope, @cookieStore, @posts, @users) ->
 
   run: (commandd, parameter) ->
+
+    result = @q.defer()
     switch commandd 
       when "post"
+
         msg = parameter
-        return if msg == ''
+        if msg == ''
+          result.reject "Post parameteres should not be empty"
+          return result.promise 
 
         @http.post('/posts.json', {msg: parameter})
           .success (data) =>
             data.replies ?= []
             @posts.data.unshift data
-      else
-        console.log("command not found")
-    
 
+
+      when "reload"
+        @posts.load()
+
+      when "reply"
+        id = parameter.substring(0, parameter.indexOf(' '))
+        repContent = parameter.substring(parameter.indexOf(' ')).trim()
+        if repContent == ''
+          result.reject 'Reply can not be empty'
+          return result.promise
+        @http.post('/posts.json', { msg: repContent, parent_id: id})
+          .success (data) =>
+            for p in @posts.data
+              if p.id == data.parent_id
+                p.replies ?= []
+                p.replies.unshift data           
+
+      when "logout"
+        @http.get('/logout').success =>
+          @rootScope.loggedInUser = null
+          @cookieStore.put 'loggedInUser', null
+
+      when "login"
+        @q.when(@users.data).then (users) =>
+          user = (users[u] for u of users when users[u].name == parameter)
+          if user.length == 1
+            user = user[0]
+          else
+            result.reject 'User not found'
+            return result.promise
+          @http.post('/login.json', user)
+            .success (data) =>
+              return unless data.id == user.id
+
+              @rootScope.loggedInUser = user
+              @cookieStore.put 'loggedInUser', user      
+   
+      else
+        result.reject 'Command not found'
+        return result.promise
+      
 ngapp_service.factory("command", 
-  ['$http', '$q', 'posts', ($http, $q, posts) ->
-    new Command $http, $q, posts
+  ['$http', '$q', '$rootScope', '$cookieStore', 'posts', 'users', ($http, $q, $rootScope, $cookieStore, posts, users) ->
+    new Command $http, $q, $rootScope, $cookieStore ,posts, users
   ]
 )
 
@@ -47,9 +90,11 @@ class Notification
     @timeoutId = @timeout( (-> $('.alert-box').slideDown()) , 750)
 
     @jobs.push job = done: no
-    promise.then =>
+    finish_func = =>
       job.done = yes
       promise
+    promise.then finish_func, finish_func
+
 
 
 ngapp_service.factory("notification",
