@@ -119,15 +119,3 @@ ngapp_service.factory("notification",
   ]
 )
 
-
-ngapp_service.factory("utilities",
-  [ '$timeout', '$http', '$q', 'notification'
-  ($timeout, $http, $q, notification) ->
-    return {
-      initialization: ->
-        $('textarea').autosize( append: "\n" )
-          .css 'resize', 'vertical'
-        notification.check()
-    }
-  ]
-)

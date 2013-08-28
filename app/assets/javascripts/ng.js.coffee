@@ -1,4 +1,3 @@
-#= require 'jquery.autosize'
 #= require 'moment'
 #= require_self
 #= require 'services/ng.service'
