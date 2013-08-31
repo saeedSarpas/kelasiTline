@@ -31,10 +31,37 @@ angular.module("ngapp.directive", [])
         timeoutId = null
         tick = ->
           time = attrs['ngappTimeago']
-          $(element).text moment(time).fromNow()
+          $(element).text moment(time)?.fromNow()
           timeoutId = $timeout tick, 1000
         tick()
         element.on '$destroy', -> $timeout.cancel timeoutId
+    }
+  ]).directive('ngappPost', ['$q', ($q) ->
+    {
+      restrict: 'E'
+      template:
+        '<div class="row">
+          <div class="large-1 columns">
+            <img class="radius" ng-src="{{image}}" />
+          </div>
+          <div class="large-11 columns">
+            <span class="post-id">
+              {{id}}
+            </span>
+            <div class="timeago" ngapp-timeago="{{time}}"></div>
+            <a class="delete-button" ng-click="{{deleteCallback}}">
+              <i class="icon-remove-sign"></i>
+            </a>
+            <pre>{{post}}</pre>
+          </div>
+        </div>'
+      replace: true
+      scope:
+        image: '@userPhoto'
+        id: '@postId'
+        time: '@postTime'
+        deleteCallback: '@deletePost'
+        post: '@postMessage'
     }
   ])
 

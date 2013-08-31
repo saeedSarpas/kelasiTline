@@ -11,34 +11,6 @@ ngapp.controller "resourcesCtrl",
       loading($scope.users = users.load())
       loading($scope.posts = posts.load())
 
-      $scope.postSubmit = ->
-        msg = $scope.postMessage.trim()
-        return if msg == ''
-
-        loading $http.post('/posts.json', {msg: $scope.postMessage})
-          .success (data) ->
-            unless data.user_id != $scope.loggedInUser.id
-              data.replies ?= []
-              $q.when($scope.posts).then (p) -> p.unshift data
-              $scope.postMessage = ''
-              $('textarea').height 0
-              $timeout ->
-                $('#post-panel a.button').removeClass('disabled')
-
-        $('#post-panel a.button').addClass('disabled')
-
-      $scope.replyClick = (id) ->
-        rep = $('#reply-'+id)
-        msg = rep.val()
-        console.log(msg)
-        rep.val ''
-        loading $http.post('/posts.json', {msg: msg, parent_id: id})
-          .success (data) ->
-            $q.when($scope.posts).then (posts) ->
-              for p in posts
-                if p.id == data.parent_id
-                  p.replies.unshift data
-
       $scope.deletePost = (id) ->
         loading $http.delete("/posts/#{id}.json")
           .success (data) ->
@@ -51,10 +23,6 @@ ngapp.controller "resourcesCtrl",
           item.show()
         else
           item.hide()
-
-      $scope.showReply = (id) ->
-        $("#post-#{id} .reply-placeholder").hide()
-        $("#post-#{id} .reply-box").show()
 
       $scope.properTime = (time) ->
         if time?
