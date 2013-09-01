@@ -1,0 +1,41 @@
+@import 'perfect-scrollbar';
+
+html, body {
+	background-color: #e1e3de;
+	height: 100%;
+	width: 100%;
+}
+
+.logo {
+	float: left;
+	padding-left: 1.4em;
+	padding-right: 6em;
+}
+
+.sidebar {
+	position: fixed;
+	width:228px;
+	height: 100%;
+	left: 0;
+	top:0px;
+	color: #762d43;
+	scroll: none;
+	overflow: hidden;
+	background-color: #14140D;
+}
+
+.scrollbar-x {
+	position: absolute;
+	bottom: 5px;
+}
+
+.scrollbar-y {
+	position: absolute;
+	right: 10px;
+}
+
+.big {
+	height: 2000px;
+	width: 500px;
+	background-color: #283756;
+}
