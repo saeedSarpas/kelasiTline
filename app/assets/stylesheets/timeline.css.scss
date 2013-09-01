@@ -3,18 +3,15 @@
 html, body {
 	background-color: #e1e3de;
 	height: 100%;
-	width: 100%;
 }
 
 .logo {
-	float: left;
-	padding-left: 1.4em;
-	padding-right: 6em;
+	margin: -1em 5.5em -1em 3.5em;
 }
 
 .sidebar {
 	position: fixed;
-	width:228px;
+	width:230px;
 	height: 100%;
 	left: 0;
 	top:0px;
@@ -24,6 +21,27 @@ html, body {
 	background-color: #14140D;
 }
 
+@media (max-width: 1200px) {
+	.sidebar {
+		width: 190px;
+	}
+}
+
+@media (max-width: 979px) {
+	header.navbar{
+		position: relative;
+	}
+	.sidebar {
+		width: 147px;
+	}
+}
+
+@media (max-width: 768px) {
+	.sidebar {
+		width: 0px;
+	}
+}
+
 .scrollbar-x {
 	position: absolute;
 	bottom: 5px;
@@ -31,11 +49,5 @@ html, body {
 
 .scrollbar-y {
 	position: absolute;
-	right: 10px;
-}
-
-.big {
-	height: 2000px;
-	width: 500px;
-	background-color: #283756;
+	right: 5px;
 }
