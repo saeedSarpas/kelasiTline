@@ -9,19 +9,44 @@ class Command
   run: (commandd, parameter) ->
 
     result = @q.defer()
-    switch commandd 
+    switch commandd
       when "post"
 
         msg = parameter
         if msg == ''
           result.reject "Post parameteres should not be empty"
-          return result.promise 
+          return result.promise
 
         @http.post('/posts.json', {msg: parameter})
           .success (data) =>
             data.replies ?= []
             @posts.data.unshift data
 
+      when "edit"
+        id_place = parameter.indexOf(' ')
+        id = parseInt(parameter.substring(0, id_place))
+        if isNaN(id)
+          result.reject 'You should pass an Id number here.'
+          return result.promise
+        edit_section = parameter.substring(id_place).trim()
+        sepMark_place = edit_section.indexOf('>>')
+        orig_text = eval(edit_section.substring(0,sepMark_place-1))
+        corr_text = edit_section.substring(sepMark_place+2)
+        user = @rootScope.loggedInUser
+        unless user?
+          result.reject 'You should be logged in first'
+          return result.promise
+        post = ([p, i] for p, i in @posts.data when p.id == id)
+        unless post.length == 1
+          result.reject 'There is no post with this id'
+          return result.promise
+        if post[0][0].user_id != user.id
+          result.reject 'You do not have permission to delete this post'
+          return result.promise
+        edited_text = post[0][0].msg.replace(orig_text,corr_text)
+        @http.put("/posts/#{id}.json", {msg: edited_text}) 
+          .success (value) =>
+            @posts.data[post[0][1]].msg = value.msg
 
       when "reload"
         @posts.load()
@@ -86,7 +111,6 @@ ngapp_service.factory("command",
   ]
 )
 
-
 class Notification
   constructor: (@rootScope, @q) ->
 
@@ -111,7 +135,6 @@ class Notification
     @promises.push promise.then finish_func, finish_func
     @q.all(@promises).then => @check()
     promise
-
 
 ngapp_service.factory("notification",
   ['$rootScope', '$q', ($rootScope, $q) ->
