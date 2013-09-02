@@ -38,16 +38,26 @@ class Command
           return result.promise
         post = ([p, i] for p, i in @posts.data when p.id == id)
         unless post.length == 1
-          result.reject 'There is no post with this id'
-          return result.promise
-        if post[0][0].user_id != user.id
+          for p,i in @posts.data
+            for q,j in p.replies
+              if q.id == id
+                 post = [[q,i,j]]
+          unless post.length == 1
+            result.reject 'There is no post with this id'
+            return result.promise
+        post_index = post[0][1]
+        reply_index = post[0][2]
+        post = post[0][0]
+        if post.user_id != user.id
           result.reject 'You do not have permission to delete this post'
           return result.promise
-        edited_text = post[0][0].msg.replace(orig_text,corr_text)
+        edited_text = post.msg.replace(orig_text,corr_text)
         @http.put("/posts/#{id}.json", {msg: edited_text}) 
           .success (value) =>
-            @posts.data[post[0][1]].msg = value.msg
-
+            if reply_index?
+              @posts.data[post_index].replies[reply_index].msg = value.msg
+            else
+              @posts.data[post_index].msg = value.msg
       when "reload"
         @posts.load()
 
@@ -91,8 +101,13 @@ class Command
           return result.promise
         post = (p for p in @posts.data when p.id.toString() == parameter)
         unless post.length == 1
-          result.reject 'There is no post with this id'
-          return result.promise
+          for p in @posts.data
+            for q in p.replies
+              if q.id.toString() == parameter
+                 post = [q]
+          unless post.length == 1 
+            result.reject 'There is no post with this id'
+            return result.promise
         if post[0].user_id != user.id
           result.reject 'You do not have permission to delete this post'
           return result.promise
