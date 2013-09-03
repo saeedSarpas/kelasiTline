@@ -6,28 +6,8 @@ ngapp.controller "resourcesCtrl",
     ($scope, $http, $q, $timeout, notification, users, posts) ->
       loading = (p) -> notification.loading p
 
-      $scope.replyMsg = {}
-
       loading($scope.users = users.load())
       loading($scope.posts = posts.load())
-
-      $scope.deletePost = (id) ->
-        loading $http.delete("/posts/#{id}.json")
-          .success (data) ->
-            id = "#post-#{data.id}"
-            $(id).slideUp()
-
-      $scope.showDelete = (id, show) ->
-        item = $("#post-#{id} > .row > .columns > .delete-button")
-        if show
-          item.show()
-        else
-          item.hide()
-
-      $scope.properTime = (time) ->
-        if time?
-          time = time.slice time.indexOf('T')+1, time.indexOf('+')
-        else ""
     ]
 
 ngapp.controller "commandCntl",

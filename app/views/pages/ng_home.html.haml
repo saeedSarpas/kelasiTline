@@ -13,21 +13,5 @@
     .panel.radius(ng-repeat="post in posts" id="post-{{post.id}}"
                   ng-mouseenter="showDelete(post.id, post.user_id==loggedInUser.id)"
                   ng-mouseleave="showDelete(post.id, false)")
-      %ngapp-post(user-photo="{{users[post.user_id].picture}}"
-        post-id="{{post.id}}"
-        post-time="{{post.updated_at}}"
-        delete-post="deletePost(post.id)"
-        post-message="{{post.msg}}")
-      .row
-        .large-11.large-offset-1.columns
-          %div(id="post-{{reply.id}}"
-               ng-repeat="reply in post.replies|orderBy:'updated_at'"
-               ng-mouseenter="showDelete(reply.id, reply.user_id==loggedInUser.id)"
-               ng-mouseleave="showDelete(reply.id, false)")
-            %hr
-              %ngapp-post(user-photo="{{users[reply.user_id].picture}}"
-                post-id="{{reply.id}}"
-                post-time="{{reply.updated_at}}"
-                delete-post="deletePost(reply.id)"
-                post-message="{{reply.msg}}")
+      %div(ngapp-post="post")
 

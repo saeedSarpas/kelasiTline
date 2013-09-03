@@ -29,16 +29,19 @@ angular.module("ngapp.directive", [])
       scope: false
       link: (scope, element, attrs) ->
         timeoutId = null
+        time = null
+        attrs.$observe 'ngappTimeago', (v) -> time = moment(v)
         tick = ->
-          time = attrs['ngappTimeago']
-          $(element).text moment(time)?.fromNow()
-          timeoutId = $timeout tick, 1000
+          $(element).text time?.fromNow()
+          timeoutId = $timeout((->tick()), 5000)
         tick()
-        element.on '$destroy', -> $timeout.cancel timeoutId
+        element.on '$destroy', ->
+          if timeoutId?
+            $timeout.cancel timeoutId
     }
-  ]).directive('ngappPost', ['$q', ($q) ->
+  ]).directive('ngappPost', ['$compile', ($compile) ->
     {
-      restrict: 'E'
+      restrict: 'A'
       template:
         '<div class="row">
           <div class="large-1 columns">
@@ -46,22 +49,35 @@ angular.module("ngapp.directive", [])
           </div>
           <div class="large-11 columns">
             <span class="post-id">
-              {{id}}
+              {{post_id}}
             </span>
-            <div class="timeago" ngapp-timeago="{{time}}"></div>
-            <a class="delete-button" ng-click="{{deleteCallback}}">
-              <i class="icon-remove-sign"></i>
-            </a>
-            <pre>{{post}}</pre>
+            <div class="timeago" ngapp-timeago="{{post_time}}"></div>
+            <pre>{{post_message}}</pre>
+            <div id="rest"></div>
           </div>
         </div>'
       replace: true
       scope:
-        image: '@userPhoto'
-        id: '@postId'
-        time: '@postTime'
-        deleteCallback: '@deletePost'
-        post: '@postMessage'
+        post: '=ngappPost'
+      link: (scope, element, attrs) ->
+        scope.image = scope.post.user().picture
+        scope.post_id = scope.post.id
+        scope.post_time = scope.post.updated_at
+        scope.$watch 'post.msg', (value) ->
+          scope.post_message = scope.post.msg
+        replyElement = $(element).find('#rest')
+        scope.$watch('post.replies', (v) ->
+          replyElement.empty()
+          return unless v?
+          index = scope.post.replies.length
+          while index > 0
+            index--
+            replyElement.append $("""
+              <hr>
+              <div ngapp-post="post.replies[#{index}]"></div>
+            """)
+          $compile(replyElement.contents())(scope)
+        , true)
     }
   ])
 

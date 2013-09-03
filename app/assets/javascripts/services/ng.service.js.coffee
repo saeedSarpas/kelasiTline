@@ -19,8 +19,7 @@ class Command
 
         @http.post('/posts.json', {msg: parameter})
           .success (data) =>
-            data.replies ?= []
-            @posts.data.unshift data
+            @posts.append data, true
 
 
       when "reload"
@@ -34,10 +33,9 @@ class Command
           return result.promise
         @http.post('/posts.json', { msg: repContent, parent_id: id})
           .success (data) =>
-            for p in @posts.data
+            for p, i in @posts.data
               if p.id == data.parent_id
-                p.replies ?= []
-                p.replies.unshift data
+                @posts.append_reply i, data
 
       when "logout"
         @http.get('/logout').success =>
