@@ -21,23 +21,20 @@ angular.module("ngapp.directive", [])
           else
             $(element).stop(true, false).slideUp()
     }
-  ).directive('ngappTimeago', ['$timeout', ($timeout)->
+  ).directive('ngappTimeago', ['timeago', (timeago)->
     {
       restrict: 'A'
       template: '<time></time>'
       replace: true
       scope: false
       link: (scope, element, attrs) ->
-        timeoutId = null
-        time = null
-        attrs.$observe 'ngappTimeago', (v) -> time = moment(v)
-        tick = ->
-          $(element).text time?.fromNow()
-          timeoutId = $timeout((->tick()), 5000)
-        tick()
+        timeagoIndex = timeago.timeagos.length
+        timeago.timeagos.push [$(element), moment()]
+        attrs.$observe 'ngappTimeago', (time) ->
+          timeago.timeagos[timeagoIndex][1] = moment(time)
         element.on '$destroy', ->
-          if timeoutId?
-            $timeout.cancel timeoutId
+          if timeagoIndex?
+            timeago.timeagos[timeagoIndex] = null
     }
   ]).directive('ngappPost', ['$compile', ($compile) ->
     {
@@ -73,8 +70,10 @@ angular.module("ngapp.directive", [])
           while index > 0
             index--
             replyElement.append $("""
-              <hr>
-              <div ngapp-post="post.replies[#{index}]"></div>
+              <div id="post-#{scope.post.replies[index].id}">
+                <hr>
+                <div ngapp-post="post.replies[#{index}]"></div>
+              </div>
             """)
           $compile(replyElement.contents())(scope)
         , true)
