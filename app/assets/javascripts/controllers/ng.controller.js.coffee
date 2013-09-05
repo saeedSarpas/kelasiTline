@@ -6,65 +6,13 @@ ngapp.controller "resourcesCtrl",
     ($scope, $http, $q, $timeout, notification, users, posts) ->
       loading = (p) -> notification.loading p
 
-      $scope.replyMsg = {}
-
       loading($scope.users = users.load())
       loading($scope.posts = posts.load())
-
-      $scope.postSubmit = ->
-        msg = $scope.postMessage.trim()
-        return if msg == ''
-
-        loading $http.post('/posts.json', {msg: $scope.postMessage})
-          .success (data) ->
-            unless data.user_id != $scope.loggedInUser.id
-              data.replies ?= []
-              $q.when($scope.posts).then (p) -> p.unshift data
-              $scope.postMessage = ''
-              $('textarea').height 0
-              $timeout ->
-                $('#post-panel a.button').removeClass('disabled')
-
-        $('#post-panel a.button').addClass('disabled')
-
-      $scope.replyClick = (id) ->
-        rep = $('#reply-'+id)
-        msg = rep.val()
-        console.log(msg)
-        rep.val ''
-        loading $http.post('/posts.json', {msg: msg, parent_id: id})
-          .success (data) ->
-            $q.when($scope.posts).then (posts) ->
-              for p in posts
-                if p.id == data.parent_id
-                  p.replies.unshift data
-
-      $scope.deletePost = (id) ->
-        loading $http.delete("/posts/#{id}.json")
-          .success (data) ->
-            id = "#post-#{data.id}"
-            $(id).slideUp()
-
-      $scope.showDelete = (id, show) ->
-        item = $("#post-#{id} > .row > .columns > .delete-button")
-        if show
-          item.show()
-        else
-          item.hide()
-
-      $scope.showReply = (id) ->
-        $("#post-#{id} .reply-placeholder").hide()
-        $("#post-#{id} .reply-box").show()
-
-      $scope.properTime = (time) ->
-        if time?
-          time = time.slice time.indexOf('T')+1, time.indexOf('+')
-        else ""
     ]
 
 ngapp.controller "commandCntl",
-  [ '$scope', '$rootScope', '$cookieStore', 'notification', 'command'
-  ($scope, $rootScope, $cookieStore, notification, command) ->
+  [ '$scope', '$rootScope', 'notification', 'command'
+  ($scope, $rootScope, notification, command) ->
     loading = (p) -> notification.loading p
 
     $scope.placeholder = "Try typing 'login <Your Name>'"
@@ -74,7 +22,7 @@ ngapp.controller "commandCntl",
       else
         "Try typing 'login <Your Name>'"
 
-    loggedInUser = $cookieStore.get 'loggedInUser'
+    loggedInUser = store.get 'loggedInUser'
     if loggedInUser?
       command.run('login', loggedInUser.name)
 
