@@ -1,9 +1,23 @@
-#= require jquery
-#= require bootstrap
-#= require angular
+#= require 'moment'
+#= require_self
+#= require 'store'
 #= require 'services/timeline.service'
 #= require 'directives/timeline.directive'
-#= require 'jquery.mousewheel'
-#= require 'perfect-scrollbar'
+#= require 'filters/timeline.filter'
+#= require 'models/timeline.model'
+#= require 'controllers/timeline.controller'
 
-timelineModule = angular.module("timelineModule",["timeline.service", "timeline.directive"]);
+angular.module("timeline", ["timeline.service", "timeline.directive", "timeline.filter", "timeline.model"])
+.config ['$routeProvider', '$locationProvider', '$httpProvider', ($routeProvider, $locationProvider, $httpProvider) ->
+    token = $("meta[name='csrf-token']").attr("content")
+    $httpProvider.defaults.headers.common["X-CSRF-Token"] = token
+    $httpProvider.defaults.headers.common["X-From-Angular"] = 'True'
+
+    $locationProvider.html5Mode on
+
+    $routeProvider
+      .when '/home',
+        templateUrl: 'home'
+        controller: 'resourcesCtrl'
+      .otherwise redirectTo: '/home'
+  ]
