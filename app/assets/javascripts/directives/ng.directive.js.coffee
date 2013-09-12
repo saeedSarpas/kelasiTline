@@ -4,24 +4,28 @@ angular.module("ngapp.directive", [])
   .directive('ngappNotify', ->
     {
       restrict: 'A'
-      template:
-        '<div class="alert-box alert" data-alert style="display:none">
-          <a href="javascript:location.reload()">reload</a>
-          <i class="icon-info-sign"></i>
-          <span id="notification-message"></span>
-        </div>'
-      replace: true
       scope: false
       link: (scope, element, attrs) ->
+        scope.flipload = flipload = new Flipload element[0],
+          line: 'horizontal', className: 'ngapp-flipload'
         attrs.$observe 'ngappNotify', (value) ->
           if value? and value != ''
-            $(element).find('#notification-message').text value
+            flipload.spinner.text value
             delay = parseInt attrs['delay']
-            $(element).delay(delay).slideDown()
+            flipload.load()
           else
-            $(element).stop(true, false).slideUp()
+            flipload.done()
     }
-  ).directive('ngappTimeago', ['timeago', (timeago)->
+  ).directive('ngappStick', ['$timeout', ($timeout) ->
+    {
+      restrict: 'A'
+      scope: false
+      link: (scope, element, attrs) ->
+        $timeout( ->
+          $(element).css('z-index', 1000).stick_in_parent()
+        , 2000)
+    }
+  ]).directive('ngappTimeago', ['timeago', (timeago)->
     {
       restrict: 'A'
       template: '<time></time>'
