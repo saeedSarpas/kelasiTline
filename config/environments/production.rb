@@ -41,6 +41,9 @@ KelasiTline::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
+  config.cache_store = :dalli_store, ["mc2.dev.ec2.memcachier.com:11211"],
+                        {:username => "b33dd3",
+                       :password => "f30e3709b9"}
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
