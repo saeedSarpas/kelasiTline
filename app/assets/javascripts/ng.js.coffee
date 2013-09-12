@@ -1,6 +1,8 @@
 #= require 'moment'
 #= require_self
 #= require 'store'
+#= require 'flipload'
+#= require 'jquery.sticky-kit'
 #= require 'services/ng.service'
 #= require 'filters/ng.filter'
 #= require 'directives/ng.directive'
