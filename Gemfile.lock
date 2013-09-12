@@ -61,6 +61,7 @@ GEM
     coffee-script-source (1.6.3)
     columnize (0.3.6)
     coolline (0.4.2)
+    dalli (2.6.4)
     debug_inspector (0.0.2)
     debugger (1.6.1)
       columnize (>= 0.3.1)
@@ -259,6 +260,7 @@ DEPENDENCIES
   bootstrap-sass!
   capybara
   coffee-rails (~> 3.2.1)
+  dalli
   guard
   guard-rspec
   guard-spork

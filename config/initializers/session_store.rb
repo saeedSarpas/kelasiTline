@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-KelasiTline::Application.config.session_store :cookie_store, key: '_kelasiTline_session'
+KelasiTline::Application.config.session_store :cache_store, key: '_kt_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
