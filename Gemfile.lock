@@ -176,7 +176,6 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rack-timeout (0.1.0beta3)
     rails (3.2.13)
       actionmailer (= 3.2.13)
       actionpack (= 3.2.13)
@@ -185,6 +184,11 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.1)
+    rails_stdout_logging (0.0.2)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -271,8 +275,8 @@ DEPENDENCIES
   meta_request
   newrelic_rpm
   pg
-  rack-timeout (~> 0.1.0beta2)
   rails (= 3.2.13)
+  rails_12factor
   rspec-rails
   ruby_gntp
   sass-rails (~> 3.2.3)
