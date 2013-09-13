@@ -2,8 +2,12 @@
 .row(ng-controller="commandCntl" ngapp-stick)
   .large-12.columns
     %form(ng-submit="runCommand()" ngapp-notify="{{notification}}" delay="1000")
-      %span.prefix(ng-show="loggedInUser.id") @{{loggedInUser.name}}
-      %input(type="text" placeholder="{{placeholder}}" ng-model="command")
+      .row.collapse
+        .large-1.columns
+          %span.prefix(ng-show="loggedInUser.id") {{loggedInUser.name}}
+          %span.prefix(ng-hide="loggedInUser.id") ت
+        .large-11.columns
+          %input(type="text" placeholder="{{placeholder}}" ng-model="command")
 
 .row
   #all-posts.large-12.columns(ng-cloak)

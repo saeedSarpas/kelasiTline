@@ -422,7 +422,7 @@ Flipload.prototype.initialize = function (el, options) {
     this._createReverse();
 
     // Create spinner
-    this._createSpinner();
+    // this._createSpinner();
 
     // Store the flipload instance
     this.el.flipload = this;
@@ -440,6 +440,9 @@ Flipload.prototype.initialize = function (el, options) {
 Flipload.prototype._createReverse = function () {
 
     this.reverse = doc.createElement('div');
+    pic = doc.createElement('div');
+    pic.className = 'loader';
+    this.reverse.appendChild(pic);
 
     this.reverse.style.position = win.getComputedStyle(this.el, "").getPropertyValue('position') === 'fixed' ? 'fixed' : 'absolute';;
 
@@ -522,7 +525,7 @@ Flipload.prototype.update = function () {
     this._updateReverseOffset();
 
     // Update spinner
-    this.spinner.update();
+    // this.spinner.update();
 
     return this;
 };

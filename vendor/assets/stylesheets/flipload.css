@@ -92,3 +92,29 @@
     -o-transform: perspective(3000px) rotateX(0deg);
     transform: perspective(3000px) rotateX(0deg);
 }
+
+@-webkit-keyframes loaderSprite {
+    from { background-position: 0px; }
+    to { background-position: -1394px; }
+}
+
+@-moz-keyframes loaderSprite {
+    from { background-position: 0px; }
+    to { background-position: -1394px; }
+}
+
+@keyframes loaderSprite {
+    from { background-position: 0px; }
+    to { background-position: -1394px; }
+}
+
+.loader {
+    width: 41px;
+    height: 41px;
+    margin: auto;
+    background-image: url("/assets/loading.png");
+    -webkit-animation: loaderSprite 1.36s steps(34, end) infinite;
+    -moz-animation: loaderSprite 1.36s steps(34, end) infinite;
+    animation: loaderSprite 1.36s steps(34, end) infinite;
+}
+
