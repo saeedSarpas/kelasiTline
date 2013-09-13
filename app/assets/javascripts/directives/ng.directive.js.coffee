@@ -10,7 +10,6 @@ angular.module("ngapp.directive", [])
           line: 'horizontal', className: 'ngapp-flipload'
         attrs.$observe 'ngappNotify', (value) ->
           if value? and value != ''
-            flipload.spinner.text value
             delay = parseInt attrs['delay']
             flipload.load()
           else
@@ -49,15 +48,17 @@ angular.module("ngapp.directive", [])
     {
       restrict: 'A'
       template:
-        '<div class="row">
+        '<div class="row"
+              ng-mouseenter="mouseEnter()"
+              ng-mouseleave="mouseLeave()">
           <div class="large-1 columns">
             <img class="radius" ng-src="{{image}}" />
           </div>
           <div class="large-11 columns">
-            <span class="post-id">
-              {{post_id}}
-            </span>
             <div class="timeago" ngapp-timeago="{{post_time}}"></div>
+            <span class="post-id" style="display:none">
+              - <a>#{{post_id}}</a>
+            </span>
             <pre>{{post_message}}</pre>
             <div id="rest"></div>
           </div>
@@ -86,6 +87,8 @@ angular.module("ngapp.directive", [])
             """)
           $compile(replyElement.contents())(scope)
         , true)
+        scope.mouseEnter = -> $(element).find('.post-id').first().fadeIn()
+        scope.mouseLeave = -> $(element).find('.post-id').first().fadeOut()
     }
   ])
 
