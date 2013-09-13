@@ -54,7 +54,7 @@ angular.module("ngapp.directive", [])
           <div class="large-1 columns">
             <img class="radius" ng-src="{{image}}" />
           </div>
-          <div class="large-11 columns">
+          <div class="large-11 columns {{post_class}}">
             <div class="timeago" ngapp-timeago="{{post_time}}"></div>
             <span class="post-id" style="display:none">
               - <a>#{{post_id}}</a>
@@ -66,6 +66,7 @@ angular.module("ngapp.directive", [])
       replace: true
       scope:
         post: '=ngappPost'
+        post_class: '@postClass'
       link: (scope, element, attrs) ->
         scope.image = scope.post.user().picture
         scope.post_id = scope.post.id

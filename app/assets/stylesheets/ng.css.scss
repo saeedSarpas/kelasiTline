@@ -11,7 +11,12 @@ header > h1 {
 }
 
 #all-posts {
-    & > .panel > .row > .large-2 > img {
+    & > .post > .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    & > .post > .row > .large-2 > img {
         width: 4.2857em;
         height: auto;
     }
@@ -29,7 +34,7 @@ header > h1 {
         white-space: pre-wrap;
     }
 
-    & > .panel > .row > .large-11 {
+    & > .post > .row > .large-11 {
 
         & .row > .large-2 > img {
             width: 3.4286em;
