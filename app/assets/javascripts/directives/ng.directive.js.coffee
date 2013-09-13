@@ -52,7 +52,7 @@ angular.module("ngapp.directive", [])
               ng-mouseenter="mouseEnter()"
               ng-mouseleave="mouseLeave()">
           <div class="large-1 columns">
-            <img class="radius" ng-src="{{image}}" />
+            <img class="radius" ng-src="{{image}}?x" />
           </div>
           <div class="large-11 columns {{post_class}}">
             <div class="timeago" ngapp-timeago="{{post_time}}"></div>
