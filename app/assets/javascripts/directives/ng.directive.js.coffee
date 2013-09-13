@@ -21,9 +21,14 @@ angular.module("ngapp.directive", [])
       restrict: 'A'
       scope: false
       link: (scope, element, attrs) ->
-        $timeout( ->
+        do_bind = ->
+          unless $(element).siblings().toArray().every((e) -> e.offsetHeight > 0)
+            $timeout( ->
+              do_bind()
+            , 300)
+            return
           $(element).css('z-index', 1000).stick_in_parent()
-        , 2000)
+        do_bind()
     }
   ]).directive('ngappTimeago', ['timeago', (timeago)->
     {
