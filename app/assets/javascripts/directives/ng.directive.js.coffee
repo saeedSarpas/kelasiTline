@@ -59,7 +59,7 @@ angular.module("ngapp.directive", [])
             <span class="post-id" style="display:none">
               - <a>#{{post_id}}</a>
             </span>
-            <pre>{{post_message}}</pre>
+            <div id="message"></div>
             <div id="rest"></div>
           </div>
         </div>'
@@ -72,7 +72,8 @@ angular.module("ngapp.directive", [])
         scope.post_id = scope.post.id
         scope.post_time = scope.post.updated_at
         scope.$watch 'post.msg', (value) ->
-          scope.post_message = scope.post.msg
+          $(element).find('#message').first()
+            .append $.parseHTML(scope.post.msg)
         replyElement = $(element).find('#rest')
         scope.$watch('post.replies', (v) ->
           replyElement.empty()
