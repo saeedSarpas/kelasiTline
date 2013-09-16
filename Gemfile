@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.13'
-# ruby '1.9.3'
+ruby '1.9.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -18,6 +18,7 @@ end
 group :production do
   gem 'pg'
   gem 'newrelic_rpm'
+  gem 'dalli'
 end
 
 group :development, :test do
@@ -46,6 +47,8 @@ gem 'bootstrap-sass', :git => 'git://github.com/thomas-mcdonald/bootstrap-sass.g
 gem 'angularjs-rails'
 gem 'haml-rails'
 
+# For markdown and Autolinking and emojis :D
+gem 'html-pipeline'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -62,6 +65,6 @@ gem 'unicorn'
 # To use debugger
 # gem 'debugger'
 
-gem "rack-timeout", '~> 0.1.0beta2'
 gem 'heroku-deflater'
+gem 'rails_12factor'
 

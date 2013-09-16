@@ -20,14 +20,10 @@
     = yield :head
 
 %body
-  - if Rails.env.development?
-    %pre( style="position:fixed;bottom:0" )= session.to_yaml
-
   .row
     .large-12.large-centered.columns
       %header
-        .panel
-          %h1 Timeline of Kelasi project
+        %h1 Timeline of Kelasi project
       %section#body= yield
 
   = javascript_include_tag "application"

@@ -7,9 +7,14 @@ class Posts
 
   load: () ->
     r = @q.defer()
+    posts_cache = store.get 'posts'
+    if posts_cache?
+      @data.length = 0
+      @append p for p in posts_cache
     @http.get("/posts.json").success (data_r) =>
       @data.length = 0
       @append p for p in data_r
+      store.set 'posts', data_r
       r.resolve @data
     r.promise
 
