@@ -4,24 +4,32 @@ angular.module("ngapp.directive", [])
   .directive('ngappNotify', ->
     {
       restrict: 'A'
-      template:
-        '<div class="alert-box alert" data-alert style="display:none">
-          <a href="javascript:location.reload()">reload</a>
-          <i class="icon-info-sign"></i>
-          <span id="notification-message"></span>
-        </div>'
-      replace: true
       scope: false
       link: (scope, element, attrs) ->
+        scope.flipload = flipload = new Flipload element[0],
+          line: 'horizontal', className: 'ngapp-flipload'
         attrs.$observe 'ngappNotify', (value) ->
           if value? and value != ''
-            $(element).find('#notification-message').text value
             delay = parseInt attrs['delay']
-            $(element).delay(delay).slideDown()
+            flipload.load()
           else
-            $(element).stop(true, false).slideUp()
+            flipload.done()
     }
-  ).directive('ngappTimeago', ['timeago', (timeago)->
+  ).directive('ngappStick', ['$timeout', ($timeout) ->
+    {
+      restrict: 'A'
+      scope: false
+      link: (scope, element, attrs) ->
+        do_bind = ->
+          unless $(element).siblings().toArray().every((e) -> e.offsetHeight > 0)
+            $timeout( ->
+              do_bind()
+            , 300)
+            return
+          $(element).css('z-index', 1000).stick_in_parent()
+        do_bind()
+    }
+  ]).directive('ngappTimeago', ['timeago', (timeago)->
     {
       restrict: 'A'
       template: '<time></time>'
@@ -40,28 +48,32 @@ angular.module("ngapp.directive", [])
     {
       restrict: 'A'
       template:
-        '<div class="row">
+        '<div class="row"
+              ng-mouseenter="mouseEnter()"
+              ng-mouseleave="mouseLeave()">
           <div class="large-1 columns">
-            <img class="radius" ng-src="{{image}}" />
+            <img class="radius" ng-src="{{image}}?x" />
           </div>
-          <div class="large-11 columns">
-            <span class="post-id">
-              {{post_id}}
-            </span>
+          <div class="large-11 columns {{post_class}}">
             <div class="timeago" ngapp-timeago="{{post_time}}"></div>
-            <pre>{{post_message}}</pre>
+            <span class="post-id" style="display:none">
+              - <a>#{{post_id}}</a>
+            </span>
+            <div id="message"></div>
             <div id="rest"></div>
           </div>
         </div>'
       replace: true
       scope:
         post: '=ngappPost'
+        post_class: '@postClass'
       link: (scope, element, attrs) ->
         scope.image = scope.post.user().picture
         scope.post_id = scope.post.id
         scope.post_time = scope.post.updated_at
         scope.$watch 'post.msg', (value) ->
-          scope.post_message = scope.post.msg
+          $(element).find('#message').first()
+            .append $.parseHTML(scope.post.msg)
         replyElement = $(element).find('#rest')
         scope.$watch('post.replies', (v) ->
           replyElement.empty()
@@ -77,6 +89,8 @@ angular.module("ngapp.directive", [])
             """)
           $compile(replyElement.contents())(scope)
         , true)
+        scope.mouseEnter = -> $(element).find('.post-id').first().fadeIn()
+        scope.mouseLeave = -> $(element).find('.post-id').first().fadeOut()
     }
   ])
 
