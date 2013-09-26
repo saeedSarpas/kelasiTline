@@ -61,6 +61,6 @@ module KelasiTline
 
     config.assets.initialize_on_precompile = false
 
-    config.assets.precompile += ['*.js','*.css']
+    config.assets.precompile += ['*.js','timeline.css']
   end
 end
