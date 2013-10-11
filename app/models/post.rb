@@ -22,4 +22,11 @@ class Post < ActiveRecord::Base
     result = pipeline.call message
     self.msg = result[:output].to_s
   end
+
+  def self.paginate(num)
+    from_date = Date.last_thursday.advance days: -7*num
+    to_date = from_date.advance days: 7
+    to_date = Date.today if num == 0
+    self.where(created_at: from_date..to_date)
+  end
 end
