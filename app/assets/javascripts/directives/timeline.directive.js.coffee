@@ -36,11 +36,11 @@ angular.module("timeline.directive", [])
       template:
         '<div class="post">
           <div class="col-md-2 center">
-              <img class="img-circle inline-profile-photo shadow" ng-src="{{image}}" />
+              <img class="img-circle inline-profile-photo shadow004" ng-src="{{image}}" />
               <div class="vertical-line"></div>
           </div>
           <div class="col-md-10">
-            <div class="col-md-12 round5 command-div shadow">
+            <div class="col-md-12 round5 command-div shadow024">
               <img class="my-arrow-box" src="/assets/timeline-images/arrow-box.png" />
               <div class="post-id">
                 {{post_id}}

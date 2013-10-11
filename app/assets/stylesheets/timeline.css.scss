@@ -2,7 +2,6 @@
 	width:  55px;
 	height: 55px;
 	background-color: #14140d;
-	border: 3px solid #f6f9fa;
 	color: #f6f9fa;
 	line-height:49px;
 }
@@ -111,15 +110,23 @@
 		box-shadow: none;
 		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(enabled = false)";
 		filter: progid:DXImageTransform.Microsoft.Shadow(enabled = false);
-	}	
+	}
 }
 
-.shadow {
+.shadow024 {
 	-moz-box-shadow: 0px 2px 4px #a1a9a1;
 	-webkit-box-shadow: 0px 2px 4px #a1a9a1;
 	box-shadow: 0px 2px 4px #a1a9a1;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#a1a9a1')";
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#a1a9a1');
+}
+
+.shadow004 {
+	-moz-box-shadow: 0px 0px 4px #a1a9a1;
+	-webkit-box-shadow: 0px 0px 4px #a1a9a1;
+	box-shadow: 0px 0px 4px #a1a9a1;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Color='#a1a9a1')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Color='#a1a9a1');
 }
 
 .command-bar {
