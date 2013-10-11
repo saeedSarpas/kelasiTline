@@ -4,22 +4,16 @@ angular.module("timeline.directive", [])
   .directive('timelineNotify', ->
     {
       restrict: 'A'
-      template:
-        '<div class="alert-box alert" data-alert style="display:none">
-          <a href="javascript:location.reload()">reload</a>
-          <i class="icon-info-sign"></i>
-          <span id="notification-message"></span>
-        </div>'
-      replace: true
       scope: false
       link: (scope, element, attrs) ->
-        attrs.$observe 'timelineNotify', (value) ->
+        scope.flipload = flipload = new Flipload element[0],
+          line: 'horizontal', className: 'ngapp-flipload'
+        attrs.$observe 'ngappNotify', (value) ->
           if value? and value != ''
-            $(element).find('#notification-message').text value
             delay = parseInt attrs['delay']
-            $(element).delay(delay).slideDown()
+            flipload.load()
           else
-            $(element).stop(true, false).slideUp()
+            flipload.done()
     }
   ).directive('timelineTimeago', ['timeago', (timeago)->
     {
