@@ -25,14 +25,6 @@ describe Post do
 		Post.first(2).should == [p2, p1]
 	end
 
-	it "Should have recent posts" do
-		ps = []
-		30.times do |i|
-			ps << Post.create {|q| q.msg = i.to_s}
-		end
-		Post.recent_posts(10).should == ps.last(10).reverse
-	end
-
   it "Should have post.parent_id==nil as recent_posts" do
     p = Post.create {|q| q.parent_id = nil; q.msg = 'nil message'}
     Post.recent_posts.should include p
@@ -78,6 +70,11 @@ describe Post do
       14.times do |i|
         Post.create!{|p| p.msg="post no #{i}"; p.created_at= i.days.ago}
       end
+    end
+
+    it "when argument is 0, should include today posts as well" do
+      p = Post.paginate(0).map{|p| p.created_at.to_date}
+      expect(p).to include Date.today
     end
 
     it "when argument is 0, should not return posts before nearest Thursday" do

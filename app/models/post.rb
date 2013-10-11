@@ -1,3 +1,5 @@
+require 'our_date'
+
 class Post < ActiveRecord::Base
   attr_accessible :msg, :user_id, :parent_id, :dir, :status
   belongs_to :parent, class_name: "Post"
@@ -26,7 +28,7 @@ class Post < ActiveRecord::Base
   def self.paginate(num)
     from_date = Date.last_thursday.advance days: -7*num
     to_date = from_date.advance days: 7
-    to_date = Date.today if num == 0
+    to_date = Date.today+1 if num == 0
     self.where(created_at: from_date..to_date)
   end
 end
