@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_filter :auth, except: [:index]
 
   def index
-    week = params[:week].to_i || 0
+    week = params[:week].to_i
   	@posts = Post.paginate(week).includes(:user, replies: :user)
     @user = current_user
 

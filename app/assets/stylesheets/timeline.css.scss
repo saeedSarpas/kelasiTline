@@ -113,20 +113,18 @@
 	}
 }
 
-.shadow024 {
-	-moz-box-shadow: 0px 2px 4px #a1a9a1;
-	-webkit-box-shadow: 0px 2px 4px #a1a9a1;
-	box-shadow: 0px 2px 4px #a1a9a1;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#a1a9a1')";
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=180, Color='#a1a9a1');
+@mixin box-shadow($shadows...) {
+	-moz-box-shadow: $shadows;
+	-webkit-box-shadow: $shadows;
+	box-shadow: $shadows;
 }
 
-.shadow004 {
-	-moz-box-shadow: 0px 0px 4px #a1a9a1;
-	-webkit-box-shadow: 0px 0px 4px #a1a9a1;
-	box-shadow: 0px 0px 4px #a1a9a1;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Color='#a1a9a1')";
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Color='#a1a9a1');
+.shadow-downward {
+	@include box-shadow(0px 2px 4px #a1a9a1);
+}
+
+.shadow-centered {
+	@include box-shadow(0px 0px 4px #a1a9a1);
 }
 
 .command-bar {

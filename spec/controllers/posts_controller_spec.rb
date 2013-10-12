@@ -30,7 +30,7 @@ describe PostsController do
         expect(assigns :user).to eq session['user']
       end
 
-      it "should use paginate for indexing!" do
+      it "should use paginate for indexing" do
         p = [double(:post)]
         p.stub(:includes).and_return(p)
         Post.stub(:paginate).with(0).and_return(p)

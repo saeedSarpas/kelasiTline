@@ -87,8 +87,8 @@ describe Post do
 
     it "when argument is 1, should only return posts for last week" do
       p = Post.paginate(1)
-      from_date = Date.last_thursday.advance days: -7
-      to_date = from_date.advance days: 7
+      from_date = Date.last_thursday - 7
+      to_date = from_date + 7
       q = p.map do |p|
         (from_date..to_date).include? p.created_at.to_date
       end

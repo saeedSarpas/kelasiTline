@@ -26,9 +26,9 @@ class Post < ActiveRecord::Base
   end
 
   def self.paginate(num)
-    from_date = Date.last_thursday.advance days: -7*num
-    to_date = from_date.advance days: 7
-    to_date = Date.today+1 if num == 0
+    from_date = Date.last_thursday - 7*num
+    to_date = from_date + 7
+    to_date = Date.today + 1 if num == 0
     self.where(created_at: from_date..to_date)
   end
 end
