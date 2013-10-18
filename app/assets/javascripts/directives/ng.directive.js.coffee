@@ -68,12 +68,15 @@ angular.module("ngapp.directive", [])
         post: '=ngappPost'
         post_class: '@postClass'
       link: (scope, element, attrs) ->
-        scope.image = scope.post.user().picture
-        scope.post_id = scope.post.id
-        scope.post_time = scope.post.updated_at
+        scope.$watch 'post.user().picture', (value) ->
+          scope.image = value
+        scope.$watch 'post.id', (value) ->
+          scope.post_id = value
+        scope.$watch 'post.updated_at', (value) ->
+          scope.post_time = value   
         scope.$watch 'post.msg', (value) ->
           $(element).find('#message').first()
-            .append $.parseHTML(scope.post.msg)
+            .html(value)
         replyElement = $(element).find('#rest')
         scope.$watch('post.replies', (v) ->
           replyElement.empty()
