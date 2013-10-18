@@ -1,7 +1,7 @@
 
 .row(ng-controller="commandCntl" ngapp-stick)
   .large-12.columns
-    %form(ng-submit="runCommand()" ngapp-notify="{{notification}}" delay="1000")
+    %form(ng-keyup="keyUp($event)" ng-submit="runCommand()" ngapp-notify="{{notification}}" delay="1000")
       .row.collapse
         .large-1.columns
           %span.prefix(ng-show="loggedInUser.id") {{loggedInUser.name}}

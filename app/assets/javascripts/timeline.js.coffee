@@ -7,7 +7,7 @@
 #= require 'models/timeline.model'
 #= require 'controllers/timeline.controller'
 
-angular.module("timeline", ["timeline.service", "timeline.directive", "timeline.filter", "timeline.model"])
+angular.module("timeline", ["timeline.service", "timeline.directive", "timeline.filter", "timeline.model", "ngRoute"])
 .config ['$routeProvider', '$locationProvider', '$httpProvider', ($routeProvider, $locationProvider, $httpProvider) ->
     token = $("meta[name='csrf-token']").attr("content")
     $httpProvider.defaults.headers.common["X-CSRF-Token"] = token

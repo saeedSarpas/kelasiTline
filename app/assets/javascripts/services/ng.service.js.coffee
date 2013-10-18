@@ -119,7 +119,6 @@ class Command
         @http.delete("/posts/#{parameter}.json")
           .success (data) =>
             id = "#post-#{data.id}"
-            $(id).slideUp()
             if reply_index?
               @posts.data[post_index].replies.splice(reply_index, 1)
             else

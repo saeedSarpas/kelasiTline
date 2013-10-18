@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require angular
+//= require angular-route
 
 $(function(){ $(document).foundation(); });
 $(function() {

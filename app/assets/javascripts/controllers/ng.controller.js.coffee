@@ -29,11 +29,27 @@ ngapp.controller "commandCntl",
     loggedInUser = store.get 'loggedInUser'
     if loggedInUser?
       command.run('login', loggedInUser.name)
+ 
+    history = []
+    history_last = 0
 
+    $scope.keyUp = ($event) ->
+      if $event.keyCode == 38
+        if history_last > 0
+          history_last -= 1
+          $scope.command = history[history_last]
+
+      if $event.keyCode == 40
+        if history.length > history_last >= 0
+          history_last = 1
+          $scope.command = history[history_last]
+ 
     $scope.runCommand = ->
       cmd_i = $scope.command.indexOf(' ')
       parameter = if cmd_i > 0 then $scope.command.substring(cmd_i).trim() else ''
       corr_command = if cmd_i > 0 then $scope.command.substring(0, cmd_i) else $scope.command
-      loading command.run(corr_command,parameter)
-      $scope.command = ''
+      loading(command.run(corr_command,parameter)).then ->
+        history.push($scope.command)
+        history_last = history.length
+        $scope.command = ''  
   ]
