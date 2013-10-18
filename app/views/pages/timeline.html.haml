@@ -13,11 +13,11 @@
 		.round5.command-bar.shadow-downward
 			%img.my-arrow-box(src="/assets/timeline-images/arrow-box.png")
 			.row(ng-controller="commandCntl")
-				%form.navbar-form(ng-submit="runCommand()")
+				%form.navbar-form(ng-keyup="keyUp($event)" ng-submit="runCommand()")
 					.col-md-2
 						%img.img-circle(ng-src="{{loggedInUser.picture}}" ng-show="loggedInUser.id")
 					.col-md-9.input-group
-						%input.form-control(type="text" placeholder="{{placeholder}}" ng-model="command")
+						%input.form-control(type="text" ng-bind="histor.text" placeholder="{{placeholder}}" ng-model="command")
 						%span.input-group-btn
 							%button.btn.btn-info(type="submit")
 								Go!
