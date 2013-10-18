@@ -46,7 +46,7 @@ end
 
 gem 'jquery-rails'
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
-gem 'angularjs-rails'
+gem "angularjs-rails", "~> 1.2.0.rc2"
 gem 'haml-rails'
 
 # For markdown and Autolinking and emojis :D
