@@ -7,7 +7,7 @@
           %span.prefix(ng-show="loggedInUser.id") {{loggedInUser.name}}
           %span.prefix(ng-hide="loggedInUser.id") ت
         .large-11.columns
-          %input(type="text" ng-bind="histor.text" placeholder="{{placeholder}}" ng-model="command")
+          %input(type="text" placeholder="{{placeholder}}" ng-model="command")
 
 .row
   #all-posts.large-12.columns(ng-cloak)

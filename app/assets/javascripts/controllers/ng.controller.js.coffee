@@ -31,18 +31,18 @@ ngapp.controller "commandCntl",
       command.run('login', loggedInUser.name)
  
     history = []
-    l = [] 
+    history_last = 0
 
     $scope.keyUp = ($event) ->
       if $event.keyCode == 38
-        if l[0] > 0
-          l[0] = l[0]-1 
-          $scope.command = history[l[0]]
+        if history_last > 0
+          history_last -= 1
+          $scope.command = history[history_last]
 
       if $event.keyCode == 40
-        if history.length > l[0] >= 0
-          l[0] = l[0]+1
-          $scope.command = history[l[0]]
+        if history.length > history_last >= 0
+          history_last = 1
+          $scope.command = history[history_last]
  
     $scope.runCommand = ->
       cmd_i = $scope.command.indexOf(' ')
@@ -50,6 +50,6 @@ ngapp.controller "commandCntl",
       corr_command = if cmd_i > 0 then $scope.command.substring(0, cmd_i) else $scope.command
       loading(command.run(corr_command,parameter)).then ->
         history.push($scope.command)
-        l[0] = history.length
+        history_last = history.length
         $scope.command = ''  
   ]
