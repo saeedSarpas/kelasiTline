@@ -1,0 +1,5 @@
+.col-md-12(ng-controller='IssuesCntl')
+	%div(ng-repeat= 'issues in kelasiTline_issues' ng-cloak)
+		{{issues.title}} - {{issues.body}}
+	%div(ng-repeat= 'issues in kelasi_issues' ng-cloak)
+		{{issues.title}} - {{issues.body}}
