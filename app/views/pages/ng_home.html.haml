@@ -1,5 +1,5 @@
 
-.row(ng-controller="commandCntl" ngapp-stick)
+.row(ng-controller="commandCntl" ngapp-stick=".postwidth")
   .large-12.columns
     %form(ng-keyup="keyUp($event)" ng-submit="runCommand()" ngapp-notify="{{notification}}" delay="1000")
       .row.collapse
@@ -9,7 +9,7 @@
         .large-11.columns
           %input(type="text" placeholder="{{placeholder}}" ng-model="command")
 
-.row
+.row.postwidth
   #all-posts.large-12.columns(ng-cloak)
     .post(ng-repeat="post in posts" id="post-{{post.id}}")
       %div(ngapp-post="post" post-class="panel radius")
