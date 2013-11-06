@@ -54,12 +54,7 @@
           if (s.currentTop != newTop) {
             s.stickyElement
               .css('position', 'fixed')
-              .css('top', newTop)
-              .css('width', '100%');
-
-            if (typeof s.getWidthFrom !== 'undefined') {
-              s.stickyElement.css('width', $(s.getWidthFrom).width());
-            }
+              .css('top', newTop);
 
             s.stickyElement.parent().addClass(s.className);
             s.currentTop = newTop;

@@ -25,11 +25,11 @@ angular.module("ngapp.directive", [])
               do_bind()
             , 300)
             return
-          attrs.$observe 'ngappStick', (width) ->
-            $(element).css('z-index', 1000).sticky({getWidthFrom: width})
-            $(window).resize ->
-              item = $(width).width()
-              element.width item 
+          width = element[0].offsetWidth
+          element.css({zIndex: 1000, width: width}).sticky()
+          $(window).resize ->
+            item = element.parent()[0].offsetWidth
+            element.width item
         do_bind()
     }
   ]).directive('ngappTimeago', ['timeago', (timeago)->
