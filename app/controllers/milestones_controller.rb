@@ -11,7 +11,6 @@ class MilestonesController < ApplicationController
 	end
 
 	def create
-		p params[:options]
 		title = params[:title]
 		options = {}
 		options = params[:options].select {|k|

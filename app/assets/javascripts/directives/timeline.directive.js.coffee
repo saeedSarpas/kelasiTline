@@ -29,6 +29,9 @@ angular.module("timeline.directive", [])
               </header>
               <div ng-repeat="issues in kelasi_issues" ng-cloak>
                 <div class="title">
+                  <span class="number">
+                    #{{issues.number}} -
+                  </span>
                   {{issues.title}}
                 </div>
                 <div class="body">
@@ -42,6 +45,9 @@ angular.module("timeline.directive", [])
               </header>
               <div ng-repeat="issues in kelasiTline_issues">
                 <div class="title">
+                  <span class="number">
+                    #{{issues.number}} -
+                  </span>
                   {{issues.title}}
                 </div>
                 <div class="body">
@@ -54,8 +60,8 @@ angular.module("timeline.directive", [])
         replace: true
         link: (scope, element, attrs) ->
           scope.issues_loaded = false
-          scope.kelasiTline_issues = kelasiTline_issues = kelasiTlineIssues.issues()
-          scope.kelasi_issues = kelasi_issues = kelasiIssues.issues()
+          scope.kelasiTline_issues = kelasiTline_issues = kelasiTlineIssues.index()
+          scope.kelasi_issues = kelasi_issues = kelasiIssues.index()
           $q.all([kelasiTline_issues, kelasi_issues]).then ->
             scope.issues_loaded = true
       }

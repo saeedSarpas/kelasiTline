@@ -22,24 +22,24 @@ class IssuesController < ApplicationController
 	end
 
 	def update
-		id = params[:id]
+		number = params[:id]
 		title = params[:title]
 		body = params[:body]
 		options = {}
 		options = params[:options].select {|k|
 			['assignee', 'milestone', 'labels', 'state'].include? k
 		} if params[:options].present?
-		@issue = current_user.github.update_issue(repo, id, title, body, options)
+		@issue = current_user.github.update_issue(repo, number, title, body, options)
 		render json: @issue
 	end
 
 	def destroy
-		id = params[:id]
+		number = params[:id]
 		options = {}
 		options = params[:options].select {|k|
 			['assignee', 'milestone', 'labels', 'state'].include? k
 		} if params[:options].present?
-		@issue = current_user.github.close_issue(repo, id, options)
+		@issue = current_user.github.close_issue(repo, number, options)
 		render json: @issue
 	end
 
