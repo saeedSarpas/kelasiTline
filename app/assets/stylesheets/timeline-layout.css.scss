@@ -1,5 +1,4 @@
-@import 'perfect-scrollbar';
-
+@import 'bootstrap_and_override';
 html, body {
 	background-color: #e1e3de;
 	height: 100%;
@@ -8,5 +7,17 @@ html, body {
 #main {
 	& > .row {
 		margin-right: 0;
+	}
+}
+
+.affix {
+	width: inherit;
+	bottom: 5px;
+}
+
+@media (max-width: $screen-md) {
+	
+	.affix {
+		position: static;
 	}
 }

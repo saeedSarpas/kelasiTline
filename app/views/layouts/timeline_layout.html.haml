@@ -8,7 +8,6 @@
 
     = javascript_include_tag "timeline-layout"
 
-    = stylesheet_link_tag "bootstrap_and_override", :media => "all"
     = stylesheet_link_tag "timeline-layout", :media => "all"
 
     = csrf_meta_tags
@@ -19,13 +18,14 @@
   %body
     #main{:role => "main"}
       = render 'layouts/messages'
-      .row
-        .col-md-3
-          = render 'timeline_left_sidebar'
-        .col-md-6
-          = yield
-        .col-md-3
-          = render 'timeline_right_sidebar'
+      .container
+        .row
+          .col-md-3
+            = render 'timeline_left_sidebar'
+          .col-md-6
+            = yield
+          .col-md-3
+            = render 'timeline_right_sidebar'
 
     - if content_for? :script
       = yield :script

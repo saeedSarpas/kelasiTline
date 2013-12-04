@@ -16,12 +16,12 @@ angular.module("timeline.directive", [])
             flipload.done()
     }
   ).directive('timelineappIssues', [
-    '$q', 'kelasiIssues', 'kelasiTlineIssues'
-    ($q, kelasiIssues, kelasiTlineIssues) ->
+    '$q', '$timeout', 'kelasiIssues', 'kelasiTlineIssues'
+    ($q, $timeout, kelasiIssues, kelasiTlineIssues) ->
       {
         restrict: 'E'
         template:
-          '<div class="col-md-12" timelineapp-Stick>
+          '<div timelineapp-stick="{{issues_loaded}}">
             <div class="issues" ng-cloak ng-show="issues_loaded">
               <header>
                 <h4>kelasi Issues</h4>
@@ -63,9 +63,31 @@ angular.module("timeline.directive", [])
           scope.kelasiTline_issues = kelasiTline_issues = kelasiTlineIssues.index()
           scope.kelasi_issues = kelasi_issues = kelasiIssues.index()
           $q.all([kelasiTline_issues, kelasi_issues]).then ->
-            scope.issues_loaded = true
+            $timeout ->  scope.issues_loaded = true
       }
-  ]).directive('timelineTimeago', ['timeago', (timeago)->
+  ]).directive('timelineappStick', ['$timeout', ($timeot) ->
+    {
+      restrict: 'A'
+      link: (scope, element, attrs) ->
+        width  = element.parent().width()
+        element.width width - 30
+        height = 0
+        top = 0
+        win_height = 0
+        do_affix = ->
+          $(element).affix
+            offset:
+              top: ->
+                height + top + 10 - $(window).height()
+            
+        attrs.$observe 'timelineappStick', (val) ->
+          if val == 'true'
+            height = element[0].offsetHeight
+            top    = element[0].offsetTop
+            win_height = $(window).height()
+            do_affix()
+    }
+   ]).directive('timelineTimeago', ['timeago', (timeago)->
     {
       restrict: 'A'
       template: '<time></time>'
