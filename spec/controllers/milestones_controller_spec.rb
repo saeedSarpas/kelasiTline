@@ -8,8 +8,7 @@ describe MilestonesController do
 
 		it 'should call Octokit list_milestones method' do
 			o = ['1','2','3']
-			Octokit::Client.any_instance.should_receive(:list_milestones)
-							.with('Kelasi/kelasi').and_return(o)
+			expect_any_instance_of(Octokit::Client).to receive(:list_milestones).with('Kelasi/kelasi') { o }
 			get 'index', org: 'Kelasi', repo: 'kelasi'
 			expect(assigns(:milestones)).to eq o
 		end
@@ -21,8 +20,10 @@ describe MilestonesController do
 		let(:req_params) { {org: 'Kelasi', repo: 'kelasi', title: 'title', format: :json} }
 
 		def ostub(obj = Hash.new)
-			Octokit::Client.any_instance.should_receive(:create_milestone)
-							.with('Kelasi/kelasi', 'title', obj).and_return(milestone)
+			# Octokit::Client.any_instance.should_receive(:create_milestone)
+			# 				.with('Kelasi/kelasi', 'title', obj).and_return(milestone)
+			expect_any_instance_of(Octokit::Client).to receive(:create_milestone)
+												   .with('Kelasi/kelasi', 'title', obj) { milestone }
 		end
 
 		it 'should call Octokit create_milestone' do

@@ -8,7 +8,7 @@ describe IssuesController do
 
 		it 'should call Octokit issues method' do
 			o = ['1','2','3']
-			Octokit::Client.any_instance.stub(:issues).with('Kelasi/kelasi').and_return(o)
+			expect_any_instance_of(Octokit::Client).to receive(:issues).with('Kelasi/kelasi') { o }
 			get 'index', org: 'Kelasi', repo: 'kelasi', format: :json
 			expect(assigns(:issues)).to eq o
 		end
@@ -18,8 +18,8 @@ describe IssuesController do
 
 	def ostub(action, *args)
 		obj = args.extract_options!
-		Octokit::Client.any_instance.should_receive(action)
-						.with('Kelasi/kelasi', *args, obj).and_return(returned_issue)
+		expect_any_instance_of(Octokit::Client).to receive(action)
+						.with('Kelasi/kelasi', *args, obj) { returned_issue }
 	end
 
 	context 'create' do

@@ -22,12 +22,12 @@ angular.module("timeline.directive", [])
         restrict: 'E'
         template:
           '<div timelineapp-stick="{{issues_loaded}}">
-            <div class="issues" ng-cloak ng-show="issues_loaded">
+            <div class="issues" ng-show="issues_loaded">
               <header>
                 <h4>kelasi Issues</h4>
                 <hr />
               </header>
-              <div ng-repeat="issues in kelasi_issues" ng-cloak>
+              <div ng-repeat="issues in kelasi_issues">
                 <div class="title">
                   <span class="number">
                     #{{issues.number}} -

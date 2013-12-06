@@ -4,26 +4,24 @@ class MilestonesController < ApplicationController
 	respond_to :json
 
 	def index
-		user = current_user
-		user = User.first unless logged_in?
+		user = User.first
 		@milestones = user.github.list_milestones repo
 		respond_with @milestones
 	end
 
 	def create
 		title = params[:title]
-		options = {}
-		options = params[:options].select {|k|
+		options = (params[:options] || {}).select {|k|
 			['state', 'description', 'due_on'].include? k
-		} if params[:options].present?
+		}
 		@milestone = current_user.github.create_milestone(repo, title, options)
 		render json: @milestone
 	end
 
 	private
 		def login
-			if current_user.blank? or current_user.name == 'Anonymous'
-				render json: {status: 'need login'}, status: :unprocessable_entity
+			unless logged_in?
+				head :unauthorized
 			else
 				yield
 			end

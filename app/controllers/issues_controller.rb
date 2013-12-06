@@ -4,8 +4,7 @@ class IssuesController < ApplicationController
 	respond_to :json
 
 	def index
-		user = current_user
-		user = User.first unless logged_in?
+		user = User.first
 		@issues = user.github.issues repo
 		respond_with @issues
 	end
@@ -13,10 +12,9 @@ class IssuesController < ApplicationController
 	def create
 		title   = params[:title]
 		body    = params[:body]
-		options = {}
-		options = params[:options].select {|k|
+		options = (params[:options] || {}).select {|k|
 			['assignee', 'milestone', 'labels'].include? k
-		} if params[:options].present?
+		}
 		@issue = current_user.github.create_issue(repo, title, body, options)
 		render json: @issue
 	end
@@ -25,28 +23,26 @@ class IssuesController < ApplicationController
 		number = params[:id]
 		title = params[:title]
 		body = params[:body]
-		options = {}
-		options = params[:options].select {|k|
+		options = (params[:options] || {}).select {|k|
 			['assignee', 'milestone', 'labels', 'state'].include? k
-		} if params[:options].present?
+		}
 		@issue = current_user.github.update_issue(repo, number, title, body, options)
 		render json: @issue
 	end
 
 	def destroy
 		number = params[:id]
-		options = {}
-		options = params[:options].select {|k|
+		options = (params[:options] || {}).select {|k|
 			['assignee', 'milestone', 'labels', 'state'].include? k
-		} if params[:options].present?
+		}
 		@issue = current_user.github.close_issue(repo, number, options)
 		render json: @issue
 	end
 
 	private
 		def login
-			if current_user.blank? or current_user.name == 'Anonymous'
-				render json: {status: 'need login'}, status: :unprocessable_entity
+			unless logged_in?
+				head :unauthorized
 			else
 				yield
 			end
