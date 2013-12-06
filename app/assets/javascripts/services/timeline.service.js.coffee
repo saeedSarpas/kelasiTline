@@ -4,7 +4,7 @@ timeline_service = angular.module("timeline.service", [])
 
 
 class Command
-  constructor: (@timeout, @http, @q, @rootScope, @posts, @users) ->
+  constructor: (@timeout, @http, @q, @rootScope, @posts, @users, @kelasiIssues, @kelasiTlineIssues) ->
 
   run: (commandd, parameter) ->
 
@@ -123,14 +123,97 @@ class Command
               @posts.data[post_index].replies.splice(reply_index, 1)
             else
               @posts.data.splice post_index, 1
+
+      when 'issue'
+        user = @rootScope.loggedInUser
+        unless user?
+          result.reject 'You should login first'
+          return result.promise
+        pointer0 = parameter.indexOf '-'
+        flag = parameter.substr(pointer0+1, 2).trim()
+        switch flag
+          when 'c'
+            parameter = parameter.substring(pointer0+2).trim()
+            parse = /(\w+)\s*<<\s*(.*)\s*>>\s*(.*)/.exec parameter
+            unless parse?
+              result.reject 'Syntax error: RTFM'
+              return result.ptomise
+
+            title = parse[2]
+            body = parse[3]
+            repo = switch parse[1]
+              when 'kelasi' then @kelasiIssues
+              when 'tline' then @kelasiTlineIssues
+
+            repo.create(title, body)
+
+          when 'et', 'eb'
+            parameter = parameter.substring(pointer0+3).trim()
+            parse = /(\w+)\s+(\d+)\s+(([\"\/])(.*)\4)\s+>>\s*(.*)/.exec parameter
+            unless parse?
+              result.reject 'Syntax error: RTFM'
+              return result.ptomise
+
+            repo = switch parse[1]
+              when 'tline' then @kelasiTlineIssues
+              when 'kelsi' then @kelasiIssues
+            number = parse[2]
+            searched_text = eval(parse[3])
+            replaced_text = parse[6]
+            issue = repo.get number
+            title = issue.title
+            body = issue.body
+
+            if flag == 'et'
+              title = title.replace(searched_text, replaced_text)
+            else
+              body = body.replace(searched_text, replaced_text)
+
+            repo.update number, title, body
+
+            return result.promise
+
+          when 'd'
+            parameter = parameter.substring(pointer0+3).trim()
+            parse = /(\w+)\s+(\d+)/.exec parameter
+            unless parse?
+              result.reject 'Syntax error: RTFM'
+              return result.ptomise
+
+            repo = switch parse[1]
+              when 'tline' then @kelasiTlineIssues
+              when 'kelsi' then @kelasiIssues
+            number = parse[2]
+
+            repo.destroy number
+
+      when 'milestone'
+        user = @rootScope.loggedInUser
+        unless user?
+          result.reject 'You should login first'
+          return result.promise
+        pointer0 = parameter.indexOf '-'
+        flag = parameter.substr(pointer0+1, 1)
+        switch flag
+          when 'c'
+            parameter = parameter.substring(pointer0+2).trim()
+            parse = /(\w+)\s+(.*)/.exec parameter
+
+            repo = switch parse[1]
+              when 'kelasi' then @kelasiMilestones
+              when 'tline' then @kelasiTlineMilestones
+            title = parse[2]
+
+            repo.create(title)
+
       else
         result.reject 'Command not found'
         return result.promise
 
 timeline_service.factory("command",
-  ['$timeout', '$http', '$q', '$rootScope', 'posts', 'users',
-  ($timeout, $http, $q, $rootScope, posts, users) ->
-    new Command $timeout, $http, $q, $rootScope, posts, users
+  ['$timeout', '$http', '$q', '$rootScope', 'posts', 'users', 'kelasiIssues', 'kelasiTlineIssues'
+  ($timeout, $http, $q, $rootScope, posts, users, kelasiIssues, kelasiTlineIssues) ->
+    new Command $timeout, $http, $q, $rootScope, posts, users, kelasiIssues, kelasiTlineIssues
   ]
 )
 

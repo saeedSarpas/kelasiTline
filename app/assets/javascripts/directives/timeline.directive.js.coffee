@@ -15,7 +15,79 @@ angular.module("timeline.directive", [])
           else
             flipload.done()
     }
-  ).directive('timelineTimeago', ['timeago', (timeago)->
+  ).directive('timelineappIssues', [
+    '$q', '$timeout', 'kelasiIssues', 'kelasiTlineIssues'
+    ($q, $timeout, kelasiIssues, kelasiTlineIssues) ->
+      {
+        restrict: 'E'
+        template:
+          '<div timelineapp-stick="{{issues_loaded}}">
+            <div class="issues" ng-show="issues_loaded">
+              <header>
+                <h4>kelasi Issues</h4>
+                <hr />
+              </header>
+              <div ng-repeat="issues in kelasi_issues">
+                <div class="title">
+                  <span class="number">
+                    #{{issues.number}} -
+                  </span>
+                  {{issues.title}}
+                </div>
+                <div class="body">
+                  {{issues.body}}
+                </div>
+                <hr />
+              </div>
+              <header>
+                <h4>kelasiTline Issues</h4>
+                <hr />
+              </header>
+              <div ng-repeat="issues in kelasiTline_issues">
+                <div class="title">
+                  <span class="number">
+                    #{{issues.number}} -
+                  </span>
+                  {{issues.title}}
+                </div>
+                <div class="body">
+                  {{issues.body}}
+                </div>
+                <hr />
+              </div>
+            </div>
+          </div>'
+        replace: true
+        link: (scope, element, attrs) ->
+          scope.issues_loaded = false
+          scope.kelasiTline_issues = kelasiTline_issues = kelasiTlineIssues.index()
+          scope.kelasi_issues = kelasi_issues = kelasiIssues.index()
+          $q.all([kelasiTline_issues, kelasi_issues]).then ->
+            $timeout ->  scope.issues_loaded = true
+      }
+  ]).directive('timelineappStick', ['$timeout', ($timeot) ->
+    {
+      restrict: 'A'
+      link: (scope, element, attrs) ->
+        width  = element.parent().width()
+        element.width width - 30
+        height = 0
+        top = 0
+        win_height = 0
+        do_affix = ->
+          $(element).affix
+            offset:
+              top: ->
+                height + top + 10 - $(window).height()
+            
+        attrs.$observe 'timelineappStick', (val) ->
+          if val == 'true'
+            height = element[0].offsetHeight
+            top    = element[0].offsetTop
+            win_height = $(window).height()
+            do_affix()
+    }
+   ]).directive('timelineTimeago', ['timeago', (timeago)->
     {
       restrict: 'A'
       template: '<time></time>'
